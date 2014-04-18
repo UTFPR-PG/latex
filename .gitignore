@@ -1,3 +1,8 @@
+## docstrip files
+*.cls
+*.pdf
+README
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -6,14 +11,12 @@
 *.fls
 *.out
 *.toc
-*.cls
 
 ## Intermediate documents:
 *.dvi
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-*.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
