@@ -88,3 +88,7 @@ sympy-plots-for-*.tex/
 
 # xindy
 *.xdy
+
+## Old files
+!handout_utfpr.cls
+!handoutUtfprTcc.cls
