@@ -1,0 +1,150 @@
+\documentclass[12pt,openright,oneside,chapter=TITLE,section=TITLE,
+	%subsection=TITLE,
+	%subsubsection=TITLE,
+	brazil]{utfpr-pg}
+
+%\usepackage{cmap}
+%\usepackage[T1]{fontenc}	% pacote já carregado pela classe
+%\usepackage{lastpage}
+%\usepackage{color}
+%\usepackage{graphicx}
+%\usepackage{lipsum}
+
+\usepackage[brazilian,hyperpageref]{backref}
+%\usepackage[alf]{abntex2cite}	% pacote de citação já carregado pela classe
+
+% % Configurações do pacote backref
+% % Usado sem a opção hyperpageref de backref
+% \renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% % Texto padrão antes do número das páginas
+% \renewcommand{\backref}{}
+% % Define os textos da citação
+% \renewcommand*{\backrefalt}[4]{
+% 	\ifcase #1 %
+% 		Nenhuma citação no texto.%
+% 	\or
+% 		Citado na página #2.%
+% 	\else
+% 		Citado #1 vezes nas páginas #2.%
+% 	\fi}%
+
+%  Informações de dados para CAPA e FOLHA DE ROSTO
+\departamento{Departamento Acadêmico de Informática}
+\curso{Bacharelado em Ciência da Computação}
+\titulo{Modelo Canônico de\\ Trabalho Acadêmico da UTFPR}
+\autor{Nome Autor}
+\local{Brasil}
+\data{2014}
+\orientador{Professor Orientador}
+\coorientador{Co Orientador}
+\tipotrabalho{Trabalho de Conclusão de Curso}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração
+% Ele não é alterado entre trabalhos do mesmo tipo
+\preambulo{Trabalho de Conclusão de Curso apresentada como requisito parcial à obtenção do título de Bacharel em Ciência da Computação, do Departamento de Informática da Universidade Tecnológica Federal do Paraná.}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+		pdfcreator={PdfLaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}{utfpr}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+% O tamanho do parágrafo é dado por:
+%\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+%\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+%\makeindex
+
+\novalistade{quadro}{loq}
+
+\begin{document}
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+\pretextual
+\imprimircapa
+% Folha de rosto (o * indica que haverá a ficha bibliográfica)
+\imprimirfolhaderosto*
+
+\begin{resumo}
+Segundo a NBR6028:2003[3.1-3.2], o resumo deve ressaltar o objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão destes itens dependem do tipo de resumo (informativo ou indicativo) e do tratamento que cada item recebe no documento original. O resumo deve ser precedido da referência do documento, com exceção do resumo inserido no próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do resumo, antecedidas da expressão Palavras-chave:, separadas entre si por ponto e finalizadas também por ponto.
+
+\vspace{\onelineskip}
+\noindent
+\textbf{Palavras-chaves}: latex. abntex. trabalho acadêmico. utfpr.
+\end{resumo}
+
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+\pdfbookmark[0]{\listfigurename}{loq}
+\listofquadros*
+\cleardoublepage
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+
+% sumário
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+
+
+\textual
+
+\chapter{Introdução}
+Este documento é um pequeno exemplo de uso da classe de de trabalhos acadêmicos da UTFPR baseado no \textsf{abntex2} e pacote \textsf{abntex2cite}. Neste exemplo de documento em específico o foco está no trabalho de conclusão de curso produzido conforme~\citeonline{UTFPR:Normas}.
+
+\chapter{Exemplo de Ilustrações}
+Abaixo mostra-se um exemplo de quadro:
+
+\begin{quadro}[h]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textit{Data Rate}					&	10Mbps		\\\hline
+		\textit{Packet Payload}				&	1436 bytes	\\\hline
+		\textit{Number of backoff stages \emph{m}}	&	3			\\\hline
+		\textit{Minimum Contention Window Size W}	&	16 \textit{slots} \\\hline
+		\textit{Control Modulation Scheme}	&	\textit{BPSK} 1/2 \\\hline
+		\textit{Propagation Delay}			&	1$\mu$s		\\
+		\hline
+	\end{tabular}
+	% parbox define o tamanho máximo de largura para a legenda
+	\parbox{0.55\textwidth}{\caption{Descrição dos parâmetros usados na simulação~(IEEE Standard for Information technology, 2012b).}}
+	\label{table:SimulationParameters}
+\end{quadro}
+
+
+% % ---
+% % Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
+% % ---
+\bookmarksetup{startatroot}% 
+
+\postextual
+
+% Referências bibliográficas
+\bibliography{referencias}
+
+%\glossary
+%\printindex
+
+\end{document}

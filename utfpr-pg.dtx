@@ -1,0 +1,440 @@
+% \iffalse meta-comment
+%<*internal>
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+\expandafter\begingroup
+\fi
+%</internal>
+%
+%
+%
+%
+% ^^A -------------------------------------- .ins -------------------------------------
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+----------------------------------------------------------------
+utfpr-pg --- Classe para trabalhos acadêmicos da UTFPR-PG
+Author:  Fabiano Rosas, Gabriel Casella
+E-mail:  fabianorosas@gmail.com, gbc921@gmail.com
+License: Released under the LaTeX Project Public License v1.3c or later
+See:     http://www.latex-project.org/lppl.txt
+----------------------------------------------------------------
+\endpreamble
+
+\postamble
+Customizations of the abnTeX2 class (http://abnTeX2.googlecode.com)
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License (LPPL), either
+version 1.3c of this license or (at your option) any later
+version.  The latest version of this license is in the file:
+
+http://www.latex-project.org/lppl.txt
+
+This work is "maintained" (as per LPPL maintenance status) by
+(not set).
+
+This work consists of the file utfpr-pg.dtx and a Makefile.
+Running make generates the derived files README.txt, utfpr-pg.pdf and utfpr-pg.cls.
+Running make inst installs the files in the user's TeX tree.
+Running make install installs the files in the local TeX tree.
+
+Further information about abnTeX2 is available on http://abntex2.googlecode.com/
+\endpostamble
+
+\usedir{tex/latex/utfpr-pg}
+\generate{
+        \file{\jobname.cls}{\from{\jobname.dtx}{class}}
+        \file{\jobname.bib}{\nopreamble\nopostamble\from{\jobname.dtx}{bibliography}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/utfpr-pg}
+\generate{
+        \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\ifx\fmtname\nameofplainTeX
+\expandafter\endbatchfile
+\else
+\expandafter\endgroup
+\fi
+%</internal>
+% \fi
+%
+%
+%
+%
+% ^^A---------------------------------------------- .dtx ----------------------------------------
+% \iffalse
+%<*driver>
+\ProvidesFile{utfpr-pg.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%<class>\ProvidesClass{utfpr-pg}
+%<*class>
+[2013/10/30 v1.00 Classe para trabalhos acadêmicos da UTFPR-PG]
+%</class>
+%<class>\DeclareOption*{\PassOptionsToClass{\CurrentOption}{abntex2}}
+%<class>\ProcessOptions\relax
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage[a4paper,margin=25mm,left=50mm,nohead]{geometry}
+\usepackage[numbered]{hypdoc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{pbox}
+\usepackage{url}
+\usepackage[font=itshape]{quoting}
+\usepackage[alf]{abntex2cite}
+\definecolor{dark-gray}{gray}{0.20}
+\definecolor{light-gray}{gray}{0.85}
+
+\newcommand{\com}[1]{
+        \colorbox{light-gray}{\texttt{\pbox{\textwidth}{\$ #1}}}
+}
+
+\newcommand{\cominline}[1]{
+        \colorbox{light-gray}{\texttt{\pbox{\textwidth}{#1}}}
+}
+
+\EnableCrossrefs
+%^^A\CodelineIndex
+\begin{document}
+\DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{\jobname.dtx}
+% \DoNotIndex{\newcommand,\newenvironment,\center,\com,\cominline}
+%
+% \title{\textsf{utfpr-pg} --- Classe para trabalhos acadêmicos da UTFPR-PG.}
+%
+% \author{Fabiano Rosas\\Gabriel Casella\thanks{fabianorosas@gmail.com, gbc921@gmail.com}}
+% \date{Released \filedate}
+%
+% \maketitle
+%
+%
+% \begin{abstract}
+%   Com o intuito de aproveitar as facilidades introduzidas pela classe abn\TeX2 para a formatação de trabalhos acadêmicos de acordo com as normas da \textbf{ABNT} está sendo desenvolvida a classe \textsf{utfpr-pg}, que implementa as normas de formatação de trabalhos acadêmicos da Universidade Tecnológica Federal do Paraná, campus Ponta Grossa.
+% \end{abstract}
+%
+%
+%
+% \section{Obtenção}
+% \label{sec:obtencao}
+%
+% A obtenção da classe pode ser feita através do link: TODO:colocar link
+%
+%
+%
+% \section{Instalação}
+% \label{sec:instalacao}
+%
+% Para a instalação é necessário estar de posse dos arquivos \jobname.dtx e Makefile.
+%
+% Utilize \cominline{make} para gerar os arquivos README.txt, utfpr-pg.pdf and utfpr-pg.cls.
+% Em seguida utilize \cominline{make inst} para instalar os arquivos da classe para o usuário.
+%
+% Para instalar para todos os usuários, utilize \cominline{make install}.
+%
+% \StopEventually{
+% \PrintIndex
+% }
+%
+%
+%
+% \section{Utilização}
+% Depois que os arquivos estiverem nos lugares corretos, a utilização da classe é feita\ldots (TODO: explicar como carregar a classe)
+%
+%\iffalse ^^A inicia a classe, mas não mostra a tag no pdf
+%<*class>
+%\fi
+%
+%
+%
+% \section{As normas da UTFPR}
+% A implementação das normas para trabalhos acadêmicos da UTFPR-PG está sendo feita tomando por base % a classe abn\TeX2 \url{http://abntex2.googlecode.com/}.
+%    \begin{macrocode}
+\LoadClass[a4paper]{abntex2}
+%    \end{macrocode}
+% Sendo necessária também a citação na forma alfanumérica da ABNT:
+%    \begin{macrocode}
+\RequirePackage[alf]{abntex2cite}
+%    \end{macrocode}
+% Para identação de todos os parágrafos utiliza-se o pacote \texttt{identfirst}.
+%    \begin{macrocode}
+\RequirePackage{indentfirst}
+%    \end{macrocode}
+%
+% A codificação utf-8 é requerida para o funcionamento da classe abn\TeX2.
+%    \begin{macrocode}
+\RequirePackage[utf8]{inputenc}
+%    \end{macrocode}
+%
+%
+% \section{Comandos pré-definidos (macros)}
+% Além dos comandos padrões da abn\TeX2, como por exemplo, |\autor|, |\titulo| e |\local|, a classe da UTFPR define as seguintes macros:
+%
+% \DescribeMacro{\utfpr}
+% Insere o texto ``Universidade Tecnológica Federal Do Paraná''.
+%
+% \DescribeMacro{\curso}
+% Usa-se para definir o curso de graduação ou especialização.
+%
+% \DescribeMacro{\departamento}
+% Usa-se para definir o departamento, coordenação ou programa.
+%
+% \DescribeMacro{\novalistade}
+% Cria novas listas como lista de quadros ou graficos. Recebe dois parametros obrigatorios. \marg{lista} que define o tipo de lista a ser criado e \marg{ext} que define a extensao de arquivo a ser usada para guardar a lista.
+%
+% Ex: |\novalistade{quadro}{loq}| criara uma lista de quadros a ser armazenada em um arquivo com a extensao .loq
+%
+% O comando |\novalistade| ainda define um ambiente para ser usado da mesma forma que |figure| ou |table|.
+%
+% \DescribeMacro{\listof...} Exibe a lista criada com o comando descrito acima.
+%
+%^^A---------------Comandos (aparecem apenas no .cls):
+%\iffalse
+\newcommand\utfpr{Universidade Tecnológica Federal Do Paraná}
+\newcommand*\erro[1]{\@latex@error{Defina \noexpand#1!}\@ehc}
+
+\providecommand\imprimircurso{\erro\curso}
+\newcommand*\curso[1]{\renewcommand{\imprimircurso}{#1}}
+
+\providecommand\imprimirdepartamento{}
+\newcommand*\departamento[1]{\renewcommand{\imprimirdepartamento}{#1}}
+
+% ---------- nova lista ----------
+\newcommand\novalistade[2]{
+% nova lista segundo memoir memman.pdf, cap. 9.3:
+\expandafter\newcommand\csname list#1name\endcsname{Lista de #1s}
+\expandafter\newcommand\csname #1name\endcsname{\uppercase{\@car #1 \@nil}\@cdr #1 \@nil}
+\newlistof{listof#1s}{#2}{\csname list#1name\endcsname}
+
+% novo ambiente segundo article.cls, l. 473
+\newcounter{#1}
+\expandafter\renewcommand\csname the#1\endcsname{\arabic{#1}}
+\expandafter\def\csname fps@#1\endcsname{tbp}
+\expandafter\def\csname ftype@#1\endcsname{2}
+\expandafter\def\csname ext@#1\endcsname{#2}
+\expandafter\def\csname fnum@#1\endcsname{\csname #1name\endcsname\nobreakspace\csname the#1\endcsname}
+\newenvironment{#1}
+               {\@float{#1}}
+               {\end@float}
+\newenvironment{#1*}
+               {\@dblfloat{#1}}
+               {\end@dblfloat}
+
+% typesetting das entradas da nova lista segundo memoir memman.pdf, pg. 164:
+\newlistentry{#1}{#2}{0}
+\expandafter\renewcommand\csname cft#1name\endcsname{\csname #1name\endcsname\space}
+\expandafter\renewcommand\expandafter*\csname cft#1aftersnum\endcsname{~~--}
+}
+% ---------- nova lista ----------
+%\fi
+%
+%
+%
+% \section{Capa}
+% Um ponto onde há diferenças visíveis entre as normas da ABNT e as normas da UTFPR é a capa. O livreto de normas da UTFPR, cita que a capa é:
+%
+% \begin{quoting}
+%   elemento obrigatório, proteção externa que reveste o trabalho. Na capa devem constar informações de identificação da obra:
+%   \begin{itemize}
+%   \item nome da Instituição e do Curso, completos;
+%   \item nome do autor(es): responsável intelectual ou artístico do trabalho;
+%   \item título principal do trabalho: claro, preciso, com palavras que identifiquem o seu conteúdo;
+%   \item subtítulo (se houver): deve ser evidenciada a sua subordinação ao título principal, precedido de dois pontos (:);
+%   \item número de volume (se houver mais de um deve constar, em cada capa, a especificação do respectivo volume);
+%   \item tipo de documento científico ou acadêmico (tese, dissertação, trabalho de conclusão de curso, monografia de especialização, relatório de pesquisa, ou tros trabalhos acadêmicos);
+%   \item local (cidade) da Instituição onde o trabalho deve ser apresentado;
+%   \item ano de depósito (entrega do trabalho).
+%   \end{itemize}
+% \end{quoting}
+%
+% Para exibir a capa, utiliza-se o comando |\imprimircapa|.
+% \begin{macro}{\imprimircapa}
+%   A macro |\imprimircapa| da classe abn\TeX2 imprime um modelo básico de capa que atende aos requisitos da seção 4.1.1 da ABNT NBR~14724:2011. A capa não é incluída no bookmark do PDF.
+%
+%^^A   Esta macro foi redefinida para atender às necessidades da UTFPR-PG:
+%^^A    \begin{macrocode}
+%\iffalse
+\renewcommand{\imprimircapa}{
+        \begin{capa}
+          \center
+          {\large\MakeUppercase\utfpr}\par
+          {\large\MakeUppercase\imprimirdepartamento}\par
+          {\large\MakeUppercase\imprimircurso}\par
+          \vfill
+          {\large\MakeUppercase\imprimirautor}\par
+          \vfill
+          {\bfseries\large\MakeUppercase\imprimirtitulo}\par
+          \vfill
+          {\large\MakeUppercase\imprimirtipotrabalho}\par
+          \vfill
+          {\large\MakeUppercase\imprimirlocal}\par
+          {\large\imprimirdata}\par
+        \end{capa}
+}
+%\fi
+%^^A    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \section{Fonte}
+% A norma da ABNT não especifica um tipo de fonte a ser utilizado, porém as normas da UTFPR-PG sugerem que para o uso com \LaTeX\ seja utilizada a fonte Nimbus. O pacote \textit{Gyre Termes} implementa as fontes da família Nimbus Roman No 9 L.
+%    \begin{macrocode}
+\RequirePackage{tgtermes}
+%    \end{macrocode}
+%
+% Para as legendas das ilustrações e tabelas, é necessário o tipo negrito e recomenda-se o uso de fonte tamanho 10. Também é utilizado como largura máxima da legenda a mesma da ilustração ou tabela.
+%    \begin{macrocode}
+\RequirePackage[font=small,labelfont=bf]{caption}
+%    \end{macrocode}
+%^^A ajuste das fontes do capitulo e seção
+%\iffalse
+\renewcommand{\ABNTEXchapterfont}{\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+%\fi
+%
+%
+%
+% \section{Espaçamentos}
+% O espaçamento entre o título do capítulo e o início do texto utilizado pela abn\TeX não é previsto pela ABNT. Para utilizar o espaçamento padrão, o comando a seguir é inserido.
+%    \begin{macrocode}
+\setlength\afterchapskip{\lineskip}
+%    \end{macrocode}
+%
+% Com relação à indentação inicial do parágrafo, é recomendado utilizar de 1,5 a 2,5 cm. O valor definido por padrão é 1,5 cm. Para modificar este valor, basta utilizar o comando |\setlength| no preâmbulo do documento:
+%    \begin{macrocode}
+\setlength\parindent{1.5cm}  
+%    \end{macrocode}
+%
+%
+%
+% \section{Margens}
+% Para modificar o tamanho das margens, pode-se utilizar o comando a seguir:
+%    \begin{macrocode}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+%    \end{macrocode}
+%
+%
+%
+%^^A \section{Sumário}
+%^^A Acho que não vale a pena mostrar isso, há muitas outras
+%^^A opções no manual da classe memoir, podemos só referenciá-lo
+%^^A no final do texto.
+%\iffalse 
+\cftsetindents{chapter}{0em}{1em}
+\cftsetindents{section}{0em}{2em}
+\cftsetindents{subsection}{0em}{3em}
+\cftsetindents{subsubsection}{0em}{4em}
+\setlength\cftbeforechapterskip{0cm}
+\renewcommand\cftchapterfont{\normalfont}
+\renewcommand{\cftchapterleader}{\normalfont\cftdotfill{\cftchapterdotsep}}
+\renewcommand{\cftchapterpagefont}{\normalfont}
+\renewcommand{\cftdotsep}{1}
+%\fi
+%
+%
+%
+%\iffalse ^^A finaliza a tag classe, mas nao mostra no pdf
+%</class>
+%\fi
+%\iffalse ^^A evita que o conteudo do .bib apareça no pdf
+% ^^A -------------------------------------- .bib -------------------------------------
+%<*bibliography>
+@misc{nimbus,
+        title = {Nimbus Roman},
+        author = {The {LaTeX} Font Catalogue},
+        url = {http://www.tug.dk/FontCatalogue/nimbus/},
+        urldate = {2013-11-01},
+        year = {2013},
+        file = {The LaTeX Font Catalogue – Nimbus Roman:/home/fabiano/.zotero/zotero/ru3nfjod.default/zotero/storage/2I5F789D/nimbus.html:text/html}
+},
+
+@misc{gyre,
+        title = {{TeX} Gyre Termes},
+        author = {The {LaTeX} Font Catalogue – },
+        url = {http://www.tug.dk/FontCatalogue/tgtermes/},
+        urldate = {2013-11-01},
+        year = {2013},
+        file = {The LaTeX Font Catalogue – TeX Gyre Termes:/home/fabiano/.zotero/zotero/ru3nfjod.default/zotero/storage/FAVQWTBI/tgtermes.html:text/html}
+}
+
+@misc{abntex2,
+        title = {A classe abntex2: Documentos técnicos e científicos brasileiros compatíveis com as normas ABNT},
+        author = {Lauro César Araújo},
+        url = {http://ctan.tche.br/macros/latex/contrib/abntex2/doc/abntex2.pdf},
+        year = {2014}
+}
+
+@manual{memoir,
+  title = {The Memoir Class},
+  author = {Peter Wilson},
+  month = {Abril},
+  year = {2013},
+  owner = {fabiano},
+  timestamp = {2014.02.24},
+  url = {http://repositorios.cpai.unb.br/ctan/macros/latex/contrib/memoir/memman.pdf}
+}
+
+@manual{latex2e,
+  title = {LaTeX2e for class and package writers},
+  organization = {The LaTeX 3 Project},
+  month = {Março},
+  year = {1999},
+  owner = {fabiano},
+  timestamp = {2014.02.24},
+  url = {http://latex-project.org/guides/clsguide.pdf}
+}
+
+@manual{package,
+  title = {How to package your LaTeX package},
+  author = {Scott Pakin},
+  month = {Novembro},
+  year = {2004},
+  owner = {fabiano},
+  timestamp = {2014.02.24},
+  url = {http://www.tex.ac.uk/ctan/info/dtxtut/dtxtut.pdf}
+}
+
+@manual{abntex2cite,
+  title = {O pacote abntex2cite: Estilos bibliográficos compatíveis com a ABNT NBR 6023},
+  author = {Lauro César Araújo},
+  month = {Janeiro},
+  year = {2014},
+  owner = {fabiano},
+  timestamp = {2014.02.24},
+  url = {http://repositorios.cpai.unb.br/ctan/macros/latex/contrib/abntex2/doc/abntex2cite.pdf}
+}
+
+%</bibliography>
+%\fi
+%
+%
+% \nocite{abntex2cite}
+% \nocite{package}
+% \nocite{latex2e}
+% \nocite{memoir}
+% \nocite{abntex2}
+% \nocite{gyre}
+% \nocite{nimbus}
+% \bibliography{utfpr-pg}
+%
+%
+\endinput
+% \Finale
