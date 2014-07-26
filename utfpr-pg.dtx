@@ -89,6 +89,8 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 \usepackage{xcolor}
 \usepackage{pbox}
 \usepackage{url}
+\usepackage{subcaption}
+\usepackage{graphicx}
 \usepackage[font=itshape]{quoting}
 \usepackage[alf,abnt-emphasize=bf,abnt-repeated-author-omit=yes]{abntex2cite}
 \definecolor{dark-gray}{gray}{0.20}
@@ -333,22 +335,48 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 %
 %
 %
-%^^A \section{Sumário}
-%^^A Acho que não vale a pena mostrar isso, há muitas outras
-%^^A opções no manual da classe memoir, podemos só referenciá-lo
-%^^A no final do texto.
-%\iffalse 
-\cftsetindents{chapter}{0em}{1em}
-\cftsetindents{section}{0em}{2em}
-\cftsetindents{subsection}{0em}{3em}
-\cftsetindents{subsubsection}{0em}{4em}
+% \section{Sumário}
+% As entradas do sumário estão sendo ajustadas de maneira dinâmica para evitar o problema que ocorre quando a numeração de uma seção fica muito grande e sobrepõe o texto. Na figura \ref{sumariotruncado}, o espaçamento entre o número do capítulo e a palavra ``capítulo'' está correto, porém, conforme as seções vão ramificando ou os números aumentando, a visualização vai ficando truncada. O comportamento correto é o apresentado na figura \ref{sumariocorreto}.
+% \begin{figure}[h]
+%   \centering
+%   \begin{subfigure}[b]{0.4\textwidth}
+%     \includegraphics[scale=.95]{imagens/sumariotruncado.png}
+%     \caption{Incorreto}
+%     \label{sumariotruncado}
+%   \end{subfigure}
+%   \begin{subfigure}[b]{0.4\textwidth}
+%     \includegraphics{imagens/sumariocorreto.png}
+%     \caption{Correto}
+%     \label{sumariocorreto}
+%   \end{subfigure}
+%   \caption{Apresentação do sumário}
+% \end{figure}
+%
+% O ajuste das entradas foi feito alterando a macro |\numberline| que é a responsável por exibir o número da seção (1.1, 1.2.1, etc\ldots) de forma que o tamanho da caixa onde fica o número seja ajustado de acordo com o tamanho que o número ocupa:
+%    \begin{macrocode}
+\newlength{\@numwidth}
+\renewcommand{\numberline}[1]{%
+        \settowidth{\@numwidth}{#1}
+        \addtolength{\@numwidth}{0.5em}
+        \hb@xt@\@numwidth{\@cftbsnum #1\@cftasnum\hfil}\@cftasnumb}
+\renewcommand{\chapternumberline}{\numberline}
+%    \end{macrocode}
+% além disso, é necessário zerar a identação das entradas:
+%    \begin{macrocode}
+\renewcommand{\tocprintchapter}{
+        \addtocontents{toc}{\cftsetindents{chapter}{0em}{1em}}}
+\cftsetindents{chapter}{0em}{1em} % here for backwards compatibility, the corret way is the above
+\setlength{\cftsectionindent}{0em}
+\setlength{\cftsubsectionindent}{0em}
+\setlength{\cftsubsubsectionindent}{0em}
+%    \end{macrocode}
+%\iffalse
 \setlength\cftbeforechapterskip{0cm}
-\renewcommand\cftchapterfont{\normalfont}
+\renewcommand{\cftchapterfont}{\MakeUppercase\bfseries}
 \renewcommand{\cftchapterleader}{\normalfont\cftdotfill{\cftchapterdotsep}}
 \renewcommand{\cftchapterpagefont}{\normalfont}
 \renewcommand{\cftdotsep}{1}
 %\fi
-%
 %
 %
 %\iffalse ^^A finaliza a tag classe, mas nao mostra no pdf
