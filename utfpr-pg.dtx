@@ -91,6 +91,7 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 \usepackage{url}
 \usepackage{subcaption}
 \usepackage{graphicx}
+\usepackage[within=none]{newfloat}
 \usepackage[font=itshape]{quoting}
 \usepackage[alf,abnt-emphasize=bf,abnt-repeated-author-omit=yes]{abntex2cite}
 \definecolor{dark-gray}{gray}{0.20}
@@ -103,6 +104,15 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 \newcommand{\cominline}[1]{
         \colorbox{light-gray}{\texttt{\pbox{\textwidth}{#1}}}
 }
+
+\newcommand\linha{\leavevmode\xleaders\hbox{-}\hfill\kern0pt}
+
+\DeclareFloatingEnvironment[
+fileext=loq,
+listname=Lista de Quadros,
+name=Quadro,
+placement=tbhp,
+]{quadro}
 
 \EnableCrossrefs
 %^^A\CodelineIndex
@@ -181,6 +191,7 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 %    \end{macrocode}
 %
 %
+%
 % \section{Comandos pré-definidos (macros)}
 % Além dos comandos padrões da abn\TeX2, como por exemplo, |\autor|, |\titulo| e |\local|, a classe da UTFPR define as seguintes macros:
 %
@@ -202,7 +213,6 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 %
 % \DescribeMacro{\listof...} Exibe a lista criada com o comando descrito acima.
 %
-%^^A---------------Comandos (aparecem apenas no .cls):
 %\iffalse
 \newcommand\utfpr{Universidade Tecnológica Federal Do Paraná}
 \newcommand*\erro[1]{\@latex@error{Defina \noexpand#1!}\@ehc}
@@ -212,35 +222,39 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 
 \providecommand\imprimirdepartamento{}
 \newcommand*\departamento[1]{\renewcommand{\imprimirdepartamento}{#1}}
-
-% ---------- nova lista ----------
-\newcommand\novalistade[2]{
-% nova lista segundo memoir memman.pdf, cap. 9.3:
-\expandafter\newcommand\csname list#1name\endcsname{Lista de #1s}
-\expandafter\newcommand\csname #1name\endcsname{\uppercase{\@car #1 \@nil}\@cdr #1 \@nil}
-\newlistof{listof#1s}{#2}{\csname list#1name\endcsname}
-
-% novo ambiente segundo article.cls, l. 473
-\newcounter{#1}
-\expandafter\renewcommand\csname the#1\endcsname{\arabic{#1}}
-\expandafter\def\csname fps@#1\endcsname{tbp}
-\expandafter\def\csname ftype@#1\endcsname{2}
-\expandafter\def\csname ext@#1\endcsname{#2}
-\expandafter\def\csname fnum@#1\endcsname{\csname #1name\endcsname\nobreakspace\csname the#1\endcsname}
-\newenvironment{#1}
-               {\@float{#1}}
-               {\end@float}
-\newenvironment{#1*}
-               {\@dblfloat{#1}}
-               {\end@dblfloat}
-
-% typesetting das entradas da nova lista segundo memoir memman.pdf, pg. 164:
-\newlistentry{#1}{#2}{0}
-\expandafter\renewcommand\csname cft#1name\endcsname{\csname #1name\endcsname\space}
-\expandafter\renewcommand\expandafter*\csname cft#1aftersnum\endcsname{~~--}
-}
-% ---------- nova lista ----------
 %\fi
+%
+%
+%
+% \section{Ambientes}
+% O pacote |newfloat| provê funcionalidades para a criação de novos ambientes flutuantes.
+%    \begin{macrocode}
+\RequirePackage[within=none]{newfloat}
+%    \end{macrocode}
+%
+% \DescribeMacro{\listadequadros}
+% A classe UTFPR-PG provê o ambiente \textsf{Quadro} e o comando |\listadequadros|
+%
+% Outros ambientes podem ser criados pelo usuário seguindo o seguinte modelo:
+%    \begin{macrocode}
+\DeclareFloatingEnvironment[
+fileext=loq,
+listname=Lista de Quadros,
+name=Quadro,
+placement=tbhp,
+]{quadro}
+%    \end{macrocode}
+% A utilização dos novos ambientes é feita da mesma maneira que o ambiente \textsf{figure}, por exemplo:
+% \begin{quadro}
+% \begin{center}
+%  \linha\par
+%
+%  $\vert$\hfill Isto não é um quadro\hfill $\vert$
+%
+% \linha
+% \end{center}
+% \caption{Exemplo de ambiente}
+% \end{quadro}
 %
 %
 %
@@ -377,6 +391,7 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 \renewcommand{\cftchapterpagefont}{\normalfont}
 \renewcommand{\cftdotsep}{1}
 %\fi
+%
 %
 %
 %\iffalse ^^A finaliza a tag classe, mas nao mostra no pdf
