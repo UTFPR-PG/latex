@@ -25,8 +25,8 @@ dummy: $(DUMMY).tex $(NAME).cls
 	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUMMY).tex
 	cp $(DUMMY).bib ./
 	bibtex $(DUMMY).aux
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex > /dev/null
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex > /dev/null
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
 	make clean
 tcc: $(TCC).tex $(NAME).cls
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
