@@ -10,6 +10,8 @@ VERS  = $(shell ltxfileinfo -v $(NAME).dtx)
 LOCAL = $(shell kpsewhich --var-value TEXMFLOCAL)
 UTREE = $(shell kpsewhich --var-value TEXMFHOME)
 all:	$(NAME).pdf clean
+$(NAME).cls: $(NAME).dtx
+	pdflatex -shell-escape -recorder $(NAME).dtx
 $(NAME).pdf: $(NAME).dtx
 	pdflatex -shell-escape -recorder $(NAME).dtx
 	bibtex $(NAME).aux
@@ -18,20 +20,22 @@ $(NAME).pdf: $(NAME).dtx
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 dummy: $(DUMMY).tex $(NAME).cls
-	pdflatex -shell-escape -recorder $(DUMMY).tex
-#	bibtex $(DUMMY).aux
-#	pdflatex --recorder --interaction=nonstopmode $(DUMMY).tex > /dev/null
-#	pdflatex --recorder --interaction=nonstopmode $(DUMMY).tex > /dev/null
+	pdflatex -shell-escape --output-directory=$(EX) -recorder $(DUMMY).tex
+	cp $(DUMMY).bib ./
+	bibtex $(DUMMY).aux
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(DUMMY).tex > /dev/null
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(DUMMY).tex > /dev/null
+	make clean
 tcc: $(TCC).tex $(NAME).cls
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
-	# this should be done with bibinputs! As always didn't fully worked... Giving up.
-	cd $(EX); bibtex *.aux
+	cp $(TCC).bib ./
+	bibtex $(TCC).aux
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
+	make clean
 clean:
 	find -iregex '.*\.\(log\|aux\|lof\|lot\|bit\|idx\|glo\|bbl\|ilg\|toc\|ind\|ins\|out\|blg\|synctex.gz\|log\|bm\|brf\|bak\|bst\|fls\|loq\|hd\)' -delete
-	rm -f $(NAME).bib
-	rm -f $(DUMMY).bib
+	rm -f *.bib
 distclean: clean
 	rm -f $(NAME).{pdf,cls}
 	rm -f $(DUMMY).{pdf,cls}
