@@ -1,6 +1,7 @@
 NAME  = utfpr-pg
 EX    = exemplos
-DUMMY = $(EX)/dummy
+DUM   = dummy
+DUMMY = $(DUM)/dummy
 TCC   = $(EX)/exemplo-tcc
 SHELL = bash
 PWD   = $(shell pwd)
@@ -19,12 +20,13 @@ $(NAME).pdf: $(NAME).dtx
 	if [ -f $(NAME).idx ]; then makeindex -q -s gind.ist -o $(NAME).ind $(NAME).idx; fi
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
+.PHONY: dummy
 dummy: $(DUMMY).tex $(NAME).cls
-	pdflatex -shell-escape --output-directory=$(EX) -recorder $(DUMMY).tex
+	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUMMY).tex
 	cp $(DUMMY).bib ./
 	bibtex $(DUMMY).aux
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(DUMMY).tex > /dev/null
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(DUMMY).tex > /dev/null
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex > /dev/null
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex > /dev/null
 	make clean
 tcc: $(TCC).tex $(NAME).cls
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
