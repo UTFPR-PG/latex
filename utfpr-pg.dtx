@@ -176,7 +176,7 @@ placement=tbhp,
 %    \begin{macrocode}
 \LoadClass[a4paper]{abntex2}
 %    \end{macrocode}
-% Sendo necessária também a citação na forma alfanumérica da ABNT:
+% Sendo necessária também a citação na forma alfanumérica da ABNT. O parâmetro |abnt-emphasize=bf| foi adicionado para deixar a ênfase das referências, mais próxima do que é feito mais usualmente, embora a ênfase padrão (itálico) também seja permitida pela norma:
 %    \begin{macrocode}
 \RequirePackage[alf,abnt-emphasize=bf,abnt-repeated-author-omit=yes]{abntex2cite}
 %    \end{macrocode}
@@ -184,10 +184,13 @@ placement=tbhp,
 %    \begin{macrocode}
 \RequirePackage{indentfirst}
 %    \end{macrocode}
-%
 % A codificação utf-8 é requerida para o funcionamento da classe abn\TeX2.
 %    \begin{macrocode}
 \RequirePackage[utf8]{inputenc}
+%    \end{macrocode}
+% O pacote |lastpage| é utilizado na folha de aprovação.
+%    \begin{macrocode}
+\RequirePackage{lastpage}
 %    \end{macrocode}
 %
 %
