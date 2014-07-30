@@ -93,6 +93,7 @@ Further information about abnTeX2 is available on http://abntex2.googlecode.com/
 \usepackage{graphicx}
 \usepackage[within=none]{newfloat}
 \usepackage[font=itshape]{quoting}
+\usepackage[brazil]{babel}
 \usepackage[alf,abnt-emphasize=bf,abnt-repeated-author-omit=yes]{abntex2cite}
 \definecolor{dark-gray}{gray}{0.20}
 \definecolor{light-gray}{gray}{0.85}
@@ -318,13 +319,19 @@ placement=tbhp,
 %    \begin{macrocode}
 \RequirePackage[font=small,font=bf,labelfont=bf]{caption}
 %    \end{macrocode}
-%^^A ajuste das fontes do capitulo e seção
+% ^^A ajuste das fontes do capitulo e seção
+%    \begin{macrocode}
+\RequirePackage{titlecaps}
+%    \end{macrocode}
 %\iffalse
 \renewcommand{\ABNTEXchapterfont}{\bfseries}
 \renewcommand{\ABNTEXchapterfontsize}{\normalsize}
 \renewcommand{\ABNTEXsectionfont}{}
 \renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\newcommand{\primeirasmaiusculas}[1]{\titlecap{#1}}
+\setsubsecheadstyle{\primeirasmaiusculas}
 \renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsubsectionfont}{\itshape}
 %\fi
 %
 %
@@ -353,18 +360,21 @@ placement=tbhp,
 %
 %
 % \section{Sumário}
-% As entradas do sumário estão sendo ajustadas de maneira dinâmica para evitar o problema que ocorre quando a numeração de uma seção fica muito grande e sobrepõe o texto. Na figura \ref{sumariotruncado}, o espaçamento entre o número do capítulo e a palavra ``capítulo'' está correto, porém, conforme as seções vão ramificando ou os números aumentando, a visualização vai ficando truncada. O comportamento correto é o apresentado na figura \ref{sumariocorreto}.
+% As modificações feitas para acomodar as normas referentes ao sumário estão listadas a seguir.
+%
+% \subsection{Espaçamento}\label{s:esp}
+% As entradas do sumário estão sendo ajustadas de maneira dinâmica para evitar o problema que ocorre quando a numeração de uma seção fica muito grande e sobrepõe o texto. Na figura \ref{f:sumariotruncado}, o espaçamento entre o número do capítulo e a palavra ``capítulo'' está correto, porém, conforme as seções vão ramificando ou os números aumentando, a visualização vai ficando truncada. O comportamento correto é o apresentado na figura \ref{f:sumariocorreto}.
 % \begin{figure}[h]
 %   \centering
 %   \begin{subfigure}[b]{0.4\textwidth}
 %     \includegraphics[scale=.95]{imagens/sumariotruncado.png}
 %     \caption{Incorreto}
-%     \label{sumariotruncado}
+%     \label{f:sumariotruncado}
 %   \end{subfigure}
 %   \begin{subfigure}[b]{0.4\textwidth}
 %     \includegraphics{imagens/sumariocorreto.png}
 %     \caption{Correto}
-%     \label{sumariocorreto}
+%     \label{f:sumariocorreto}
 %   \end{subfigure}
 %   \caption{Apresentação do sumário}
 % \end{figure}
@@ -387,13 +397,37 @@ placement=tbhp,
 \setlength{\cftsubsectionindent}{0em}
 \setlength{\cftsubsubsectionindent}{0em}
 %    \end{macrocode}
-%\iffalse
+%
+% \subsection{Formatação}
+% A formatação das entradas do sumário deve ser feita seguindo a imagem \ref{f:sumario}, ignorando-se as discrepâncias com relação ao espaçamento, que já foram corrigidas na seção \ref{s:esp}.
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[scale=.3]{imagens/sumario.png}
+%  \caption{Sumário de acordo com o livreto de normas da UTFPR}
+%  \label{f:sumario}
+%\end{figure}
+%
+% Para remover o espaço entre os capítulos:
+%    \begin{macrocode}
 \setlength\cftbeforechapterskip{0cm}
-\renewcommand{\cftchapterfont}{\MakeUppercase\bfseries}
+%    \end{macrocode}
+%
+% Ajustes das fontes, capitalização, pesos, etc.
+%    \begin{macrocode}
+\renewcommand{\cftchapterfont}{\bfseries}
 \renewcommand{\cftchapterleader}{\normalfont\cftdotfill{\cftchapterdotsep}}
 \renewcommand{\cftchapterpagefont}{\normalfont}
 \renewcommand{\cftdotsep}{1}
-%\fi
+\newcommand{\texorpdf}[1]{\texorpdfstring{\uppercase{#1}}{#1}}
+\renewcommand{\cftsectionfont}{\mdseries\texorpdf}
+\renewcommand{\cftsubsectionfont}{\mdseries}
+\renewcommand{\cftsubsubsectionfont}{\mdseries}
+%    \end{macrocode}
+% 
+% Fazer com as referências apareçam como um capítulo normal no sumário.
+%    \begin{macrocode}
+\renewcommand{\bibsection}{\chapter*{\bibname}\prebibhook}
+%    \end{macrocode}
 %
 %
 %
