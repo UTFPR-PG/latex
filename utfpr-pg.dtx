@@ -320,16 +320,13 @@ placement=tbhp,
 \RequirePackage[font=small,font=bf,labelfont=bf]{caption}
 %    \end{macrocode}
 % ^^A ajuste das fontes do capitulo e seção
-%    \begin{macrocode}
-\RequirePackage{titlecaps}
-%    \end{macrocode}
 %\iffalse
 \renewcommand{\ABNTEXchapterfont}{\bfseries}
 \renewcommand{\ABNTEXchapterfontsize}{\normalsize}
 \renewcommand{\ABNTEXsectionfont}{}
 \renewcommand{\ABNTEXsectionfontsize}{\normalsize}
-\newcommand{\primeirasmaiusculas}[1]{\titlecap{#1}}
-\setsubsecheadstyle{\primeirasmaiusculas}
+%^^A\newcommand{\primeirasmaiusculas}[1]{\titlecap{#1}}
+%^^A\setsubsecheadstyle{\primeirasmaiusculas}
 \renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
 \renewcommand{\ABNTEXsubsubsubsectionfont}{\itshape}
 %\fi
@@ -418,8 +415,8 @@ placement=tbhp,
 \renewcommand{\cftchapterleader}{\normalfont\cftdotfill{\cftchapterdotsep}}
 \renewcommand{\cftchapterpagefont}{\normalfont}
 \renewcommand{\cftdotsep}{1}
-\newcommand{\texorpdf}[1]{\texorpdfstring{\uppercase{#1}}{#1}}
-\renewcommand{\cftsectionfont}{\mdseries\texorpdf}
+\newcommand{\upcase}[1]{\uppercase\expandafter{#1}}
+\renewcommand{\cftsectionfont}{\mdseries\upcase}
 \renewcommand{\cftsubsectionfont}{\mdseries}
 \renewcommand{\cftsubsubsectionfont}{\mdseries}
 %    \end{macrocode}
