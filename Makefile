@@ -1,8 +1,5 @@
 NAME  = utfpr-pg
 EX    = exemplos
-DUM   = dummy
-DUMMY = $(DUM)/dummy
-TCC   = $(EX)/exemplo-tcc
 SHELL = bash
 PWD   = $(shell pwd)
 TEMP := $(shell mktemp -d)
@@ -20,28 +17,11 @@ $(NAME).pdf: $(NAME).dtx
 	if [ -f $(NAME).idx ]; then makeindex -q -s gind.ist -o $(NAME).ind $(NAME).idx; fi
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
-.PHONY: dummy
-dummy: $(DUMMY).tex $(NAME).cls
-	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUMMY).tex
-	cp $(DUMMY).bib ./
-	bibtex $(DUMMY).aux
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
-	make clean
-tcc: $(TCC).tex $(NAME).cls
-	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
-	cp $(TCC).bib ./
-	bibtex $(TCC).aux
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
-	make clean
 clean:
 	find -iregex '.*\.\(log\|aux\|lof\|lot\|bit\|idx\|glo\|bbl\|ilg\|toc\|ind\|ins\|out\|blg\|synctex.gz\|log\|bm\|brf\|bak\|bst\|fls\|loq\|hd\)' -delete
 	rm -f *.bib
 distclean: clean
 	rm -f $(NAME).{pdf,cls}
-	rm -f $(DUMMY).{pdf,cls}
-	rm -f $(TCC).{pdf,cls}
 inst: all
 	mkdir -p $(UTREE)/{tex,source,doc}/latex/$(NAME)
 	cp $(NAME).dtx $(UTREE)/source/latex/$(NAME)
