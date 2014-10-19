@@ -376,23 +376,21 @@ placement=tbhp,
 %   \caption{Apresentação do sumário}
 % \end{figure}
 %
-% O ajuste das entradas foi feito alterando a macro |\numberline| que é a responsável por exibir o número da seção (1.1, 1.2.1, etc\ldots) de forma que o tamanho da caixa onde fica o número seja ajustado de acordo com o tamanho que o número ocupa:
+% O ajuste das entradas foi feito alterando a macro |\numberlinehook| que é expandida dentro da macro responsável por exibir o número da seção (1.1, 1.2.1, etc\ldots) de forma que o tamanho da caixa onde fica o número seja ajustado de acordo com o espaço que o número ocupa:
 %    \begin{macrocode}
-\newlength{\@numwidth}
-\renewcommand{\numberline}[1]{%
-        \settowidth{\@numwidth}{#1}
-        \addtolength{\@numwidth}{0.5em}
-        \hb@xt@\@numwidth{\@cftbsnum #1\@cftasnum\hfil}\@cftasnumb}
-\renewcommand{\chapternumberline}{\numberline}
+\renewcommand\numberlinehook[1]{%
+        \addtolength{\@tempdima}{\widthof{#1}}
+}
+\renewcommand\chapternumberlinehook\numberlinehook
 %    \end{macrocode}
 % além disso, é necessário zerar a identação das entradas:
 %    \begin{macrocode}
 \renewcommand{\tocprintchapter}{
-        \addtocontents{toc}{\cftsetindents{chapter}{0em}{1em}}}
+       \addtocontents{toc}{\cftsetindents{chapter}{0em}{1em}}}
 \cftsetindents{chapter}{0em}{1em} % here for backwards compatibility, the corret way is the above
-\setlength{\cftsectionindent}{0em}
-\setlength{\cftsubsectionindent}{0em}
-\setlength{\cftsubsubsectionindent}{0em}
+\cftsetindents{section}{0em}{1em}
+\cftsetindents{subsection}{0em}{1em}
+\cftsetindents{subsubsection}{0em}{1em}
 %    \end{macrocode}
 %
 % \subsection{Formatação}
