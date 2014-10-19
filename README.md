@@ -7,7 +7,6 @@ Modelo para trabalhos acadêmicos em LaTeX desenvolvido pelos alunos do DAINF/UT
 ## Informações gerais sobre o repo:
  * O modelo é distribuído no formato .dtx.
  * utfpr-pg.dtx é o arquivo principal que será distribuído aos usuários.
- * As pastas doc-tcc e handout contém os respectivos arquivos .dtx com a sua documentação própria. Estes arquivos serão adicionados ao arquivo principal quando das _releases_.
 
 ## Instruções de uso:
 Com os arquivos utfpr-pg.dtx e Makefile na mesma pasta:
