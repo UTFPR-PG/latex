@@ -15,7 +15,7 @@ Com os arquivos utfpr-pg.dtx e Makefile na mesma pasta:
 
 O arquivo utfpr-pg.pdf que será criado na etapa 1, contém informações adicionais de uso.
 
----
+
 ## Informações para desenvolvedores:
  * Pull requests somente no branch devel.
  * A wiki possui guias e manuais referentes às principais tecnologias utilizadas.
