@@ -196,34 +196,47 @@ placement=tbhp,
 %
 %
 %
-% \section{Ambientes}
-% O pacote |newfloat| provê funcionalidades para a criação de novos ambientes flutuantes.
-%    \begin{macrocode}
-\RequirePackage[within=none]{newfloat}
-%    \end{macrocode}
-%
+% \subsection{Ambientes}
 % \DescribeMacro{\listadequadros}
 % A classe UTFPR-PG provê o ambiente \textsf{Quadro} e o comando |\listadequadros|
 %
 % Outros ambientes podem ser criados pelo usuário seguindo o seguinte modelo:
 %    \begin{macrocode}
 \DeclareFloatingEnvironment[
-fileext=loq,
-listname=Lista de Quadros,
-name=Quadro,
-placement=tbhp,
+    fileext=loq,
+    listname=Lista de Quadros,
+    name=Quadro,
+    placement=tbhp,
 ]{quadro}
 %    \end{macrocode}
 % A utilização dos novos ambientes é feita da mesma maneira que o ambiente \textsf{figure}, por exemplo:
+%
+% \begin{verbatim}
 % \begin{quadro}
-% \begin{center}
-%  \linha\par
+% \centering
+%   \begin{tabular}{|l|l|l|l|l|}
+%    \hline
+%    Isto   & a & b & c & d\\ \hline
+%    é      & a & b & c & d\\ \hline
+%    um     & a & b & c & d\\ \hline
+%    quadro & a & b & c & d\\ \hline
+%  \end{tabular}
+% \caption{Exemplo de quadro}
+% \end{quadro}
+% \end{verbatim}
+% 
+% Produz o seguinte quadro:
 %
-%  $\vert$\hfill Isto não é um quadro\hfill $\vert$
-%
-% \linha
-% \end{center}
-% \caption{Exemplo de ambiente}
+% \begin{quadro}
+% \centering
+%   \begin{tabular}{|l|l|l|l|l|}
+%     \hline
+%    Isto   & a & b & c & d\\ \hline
+%    é      & a & b & c & d\\ \hline
+%    um     & a & b & c & d\\ \hline
+%    quadro & a & b & c & d\\ \hline
+%  \end{tabular}
+% \caption{Exemplo de quadro}
 % \end{quadro}
 %
 %
