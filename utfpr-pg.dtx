@@ -242,6 +242,45 @@ placement=tbhp,
 %
 %
 % \section{Capa}
+% \subsection{Capa}
+% Para exibir a capa, utiliza-se o comando |\imprimircapa|.
+% \begin{macro}{\imprimircapa}
+%   A macro |\imprimircapa| da classe abn\TeX2 imprime um modelo básico de capa que atende aos requisitos da seção 4.1.1 da ABNT NBR~14724:2011. A capa não é incluída no bookmark do PDF.
+%
+%   Esta macro foi redefinida para atender às necessidades da UTFPR-PG.
+% \end{macro}
+%
+%
+%
+% \subsection{Fonte}
+% A norma da ABNT não especifica um tipo de fonte a ser utilizado, porém as normas da UTFPR-PG sugerem que para o uso com \LaTeX\ seja utilizada a fonte Nimbus, que é uma fonte parecida com a Times New Roman. A fonte Times é de propriedade da Microsoft e o seu uso requer licença.
+%
+%
+%
+% \subsection{Espaçamentos}
+% Existem alguns espaçamentos que podem variar e portanto provemos aqui alguns comandos para que o usuário os modifique:
+%
+% \DescribeMacro{parágrafo}
+% Com relação à indentação inicial do parágrafo, é recomendado utilizar de 1,5 a 2,5 cm. O valor definido por padrão é 1,5 cm. Para modificar este valor, basta utilizar o comando |\setlength\parindent|\marg{tamanho} .
+%
+% \DescribeMacro{margens}
+% Para modificar o tamanho das margens, pode-se utilizar os comandos a seguir:
+%    \begin{macrocode}
+ \setlrmarginsandblock{3cm}{2cm}{*}
+ \setulmarginsandblock{3cm}{2cm}{*}
+ \checkandfixthelayout
+%    \end{macrocode}
+%
+% \DescribeMacro{títulos}
+% O espaçamento entre os títulos e o texto que os precede e sucede pode ser alterado com |\setlength\afterchapskip|\marg{tamanho} e |\setlength\beforechapskip|\marg{tamanho}.
+%
+%
+%
+% ^^A ------------------------------------- enduser -------------------------------------------
+% \section{Informações para o desenvolvedor}
+% Esta seção contém informações para aqueles que estão fazendo o desenvolvimento e manutenção da classe, bem como aqueles que por algum motivo específico precisam de mais detalhes sobre a implementação.
+%
+% \subsection{Capa}
 % Um ponto onde há diferenças visíveis entre as normas da ABNT e as normas da UTFPR é a capa. O livreto de normas da UTFPR, cita que a capa é:
 %
 % \begin{quoting}
@@ -451,24 +490,21 @@ placement=tbhp,
 %  \label{f:sumario}
 %\end{figure}
 %
-% Para remover o espaço entre os capítulos:
-%    \begin{macrocode}
-\setlength\cftbeforechapterskip{0cm}
-%    \end{macrocode}
+% Algumas das modificações necessárias já foram feitas quando se modificaram as fontes para os capítulos, seções, etc., restando aqui as que são relativas ao sumário apenas:
 %
-% Ajustes das fontes, capitalização, pesos, etc.
+%^^A \renewcommand{\cftchapterfont}{\bfseries} já está na seção Fonte
 %    \begin{macrocode}
-\renewcommand{\cftchapterfont}{\bfseries}
 \renewcommand{\cftchapterleader}{\normalfont\cftdotfill{\cftchapterdotsep}}
 \renewcommand{\cftchapterpagefont}{\normalfont}
 \renewcommand{\cftdotsep}{1}
-\newcommand{\upcase}[1]{\uppercase{#1}}
-\renewcommand{\cftsectionfont}{\mdseries\upcase}
-\renewcommand{\cftsubsectionfont}{\mdseries}
-\renewcommand{\cftsubsubsectionfont}{\mdseries}
 %    \end{macrocode}
+%^^A\newcommand{\upcase}[1]{\uppercase{#1}} mover p/ seção Fonte
+%^^A\renewcommand{\cftsectionfont}{\mdseries\upcase} mover p/ seção Fonte
+%^^A\renewcommand{\cftsubsectionfont}{\mdseries} mover p/ seção Fonte
+%^^A\renewcommand{\cftsubsubsectionfont}{\mdseries} mover p/ seção Fonte
 % 
-% Fazer com as referências apareçam como um capítulo normal no sumário.
+% As referências devem aparecer como um capítulo normal no sumário:
+%
 %    \begin{macrocode}
 \renewcommand{\bibsection}{\chapter*{\bibname}\prebibhook}
 %    \end{macrocode}
