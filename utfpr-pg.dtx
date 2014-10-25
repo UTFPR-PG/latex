@@ -319,6 +319,62 @@ placement=tbhp,
 %
 %
 %
+% \subsection{Folha de rosto}
+% De acordo com as normas, a folha de rosto:
+%
+% \begin{quoting}
+% É constituída de anverso e verso e tem os seguintes elementos:
+% \begin{itemize}
+% \item nome do autor (es): responsável intelectual ou artístico do trabalho;
+% \item título principal do trabalho: claro, preciso, com palavras que identifiquem o seu conteúdo;
+% \item subtítulo (se houver): deve ser evidenciada sua subordinação ao título principal, precedido de dois pontos (:);
+% \item número de volumes (se houver mais de um, deve constar em cada folha de rosto a especificação do respectivo volume);
+% \item tipo de documento científico ou acadêmico (tese, dissertação, trabalho de conclusão de curso e outros) e objetivo (aprovação em disciplina, grau pretendido e outros); nome da instituição a que será submetido, área de concentração;
+% \item nome do orientador e do co-orientador (se houver);
+% \item local (cidade) da instituição onde o trabalho deve ser apresentado;
+% \item ano de depósito (da entrega).
+% \end{itemize}
+% \end{quoting}
+%
+% A folha de rosto foi definida da seguinte forma:
+%    \begin{macrocode}
+\renewcommand{\folhaderostocontent}{
+  \begin{center}
+
+    {\large\MakeUppercase\imprimirautor}
+	
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      {\bfseries\large\MakeUppercase\imprimirtitulo}\par
+    \end{center}
+    \vspace*{\fill}
+	
+    \abntex@ifnotempty{\imprimirpreambulo}{%
+      \hspace{.45\textwidth}
+      \begin{minipage}{.5\textwidth}
+      	\SingleSpacing
+         \imprimirpreambulo
+       \end{minipage}%
+       \vspace*{\fill}
+    }%
+
+    {\large\imprimirorientadorRotulo~\imprimirorientador\par}
+    \abntex@ifnotempty{\imprimircoorientador}{%
+       {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
+    }%
+    \vspace*{\fill}
+
+    {\large\MakeUppercase\imprimirlocal}\par
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+
+  \end{center}
+}
+%    \end{macrocode}
+%
+% 
+%
 % \subsection{Fonte}
 % A norma da ABNT não especifica um tipo de fonte a ser utilizado, porém as normas da UTFPR-PG sugerem que para o uso com \LaTeX\ seja utilizada a fonte Nimbus. O pacote \textit{Gyre Termes} implementa as fontes da família Nimbus Roman No 9 L.
 %    \begin{macrocode}
