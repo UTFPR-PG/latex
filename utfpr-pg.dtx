@@ -251,6 +251,14 @@ placement=tbhp,
 %
 %
 %
+% \subsection{Folha de rosto}
+% Para exibir a folha de rosto, utiliza-se o comando |\imprimirfolhaderosto|.
+% \begin{macro}{\imprimirfolhaderosto}
+%   A macro |\imprimirfolhaderosto| insere a folha de rosto no texto. A folha de rosto está de acordo com a norma da UTFPR. Embora o arquivo |.doc| provido pela biblioteca como exemplo das normas contenha o nome de autor, local e data em negrito, o manual de normas não exige tal formatação. A página 25 do manual exibe um exemplo de folha de rosto sem negrito nas referidas entradas.
+% \end{macro}
+%
+%
+% 
 % \subsection{Fonte}
 % A norma da ABNT não especifica um tipo de fonte a ser utilizado, porém as normas da UTFPR-PG sugerem que para o uso com \LaTeX\ seja utilizada a fonte Nimbus, que é uma fonte parecida com a Times New Roman. A fonte Times é de propriedade da Microsoft e o seu uso requer licença.
 %
@@ -273,6 +281,61 @@ placement=tbhp,
 % \DescribeMacro{títulos}
 % O espaçamento entre os títulos e o texto que os precede e sucede pode ser alterado com |\setlength\afterchapskip|\marg{tamanho} e |\setlength\beforechapskip|\marg{tamanho}.
 %
+%
+%
+% \subsection{Resumo}
+% Sobre o resumo, a norma diz:
+% \begin{quoting}
+%   O texto deverá conter no máximo 500 palavras e ser antecedido pela referência do estudo. Também, não deve conter citações. O resumo deve ser redigido em parágrafo único, espaçamento simples e seguido das palavras representativas do conteúdo do estudo, isto é, palavras-chave, em número de três a cinco, separadas entre si por ponto e finalizadas também por ponto.
+% \end{quoting}
+%
+% Para incluir a referência do próprio estudo, será necessário que o usuário produza duas entradas \textit{bibtex} com os seus dados e nomeie as chaves destas entradas como |this| e |thisen|, para referência em português e inglês, respectivamente. Veja o exemplo abaixo:
+%
+% \begin{verbatim}
+%@thesis{this,
+%    author={Aluno, Nome do},
+%    title = {{Titulo do trabalho de conclusão de curso}},
+%    year={2014},
+%    type={Trabalho de conclusão de curso}
+%}
+%
+%@thesis{thisen,
+%    author={Aluno, Nome do},
+%    title = {{Thesis title}},
+%    year={2014},
+%    type={BSc. Thesis}
+%}
+%\end{verbatim}
+%
+% É importante observar que as entradas não precisam ser do tipo |@thesis|, basta apenas que contenham as chaves (this, thisen) corretas. Estas entradas devem ser colocadas no seu arquivo |.bib|, juntamente com as outras referências.
+%
+% \DescribeMacro{\refthis}
+% Para exibir a referência antes do resumo e do \textit{abstract}, insira, como primeira linha do ambiente, o comando |\refthis|\oarg{en}\marg{bib file}, conforme o exemplo abaixo. Suponha um arquivo de referências chamado |referencias.bib|.
+%
+% \begin{verbatim}
+%\begin{resumo}
+%    \refthis{referencias}
+%
+%    Texto do resumo contendo no máximo 500 palavras.
+%
+%    \vspace{\onelineskip}
+%    \noindent
+%    \textbf{Palavras-chaves}: palavras. chaves.
+%\end{resumo}
+%
+%\begin{resumo}[Abstract]
+%    \begin{otherlanguage*}{english}
+%    \refthis[en]{referencias}
+%
+%    Abstract text with a maximum word-count of 500.
+%
+%    \vspace{\onelineskip}
+%    \noindent
+%    \textbf{Key-words}: key. words.
+%    \end{otherlanguage*}
+%\end{resumo}
+% \end{verbatim}
+% 
 %
 %
 % ^^A ------------------------------------- enduser -------------------------------------------
@@ -459,8 +522,8 @@ placement=tbhp,
 % Novamente não há como saber o que ``1,5'' significa. Usaremos um valor padrão e informaremos ao usuário como mudar este espaçamento caso necessário.
 %
 %    \begin{macrocode}
-\setlength\beforechapskip{3.0\onelineskip}
-\setlength\afterchapskip{3.0\onelineskip}
+\setlength\beforechapskip{2.0\onelineskip}
+\setlength\afterchapskip{2.0\onelineskip}
 
 \setlength\beforesecskip{\beforechapskip}
 \setlength\aftersecskip{\afterchapskip}
@@ -564,6 +627,42 @@ placement=tbhp,
 %    \begin{macrocode}
 \renewcommand{\bibsection}{\chapter*{\bibname}\prebibhook}
 %    \end{macrocode}
+%
+%
+%
+% \subsection{Resumo}
+% Sobre o resumo, a norma diz:
+% \begin{quoting}
+%   O texto deverá conter no máximo 500 palavras e ser antecedido pela referência do estudo. Também, não deve conter citações. O resumo deve ser redigido em parágrafo único, espaçamento simples e seguido das palavras representativas do conteúdo do estudo, isto é, palavras-chave, em número de três a cinco, separadas entre si por ponto e finalizadas também por ponto.
+% \end{quoting}
+%
+% Para incluir a referência do próprio estudo, utilizaremos o pacote |multibib| para inserir duas bibliografias, uma que funcionará normalmente e será apresentada no final do trabalho e outra que servirá apenas para referenciarmos o próprio trabalho. Esta bibliografia será exibida antes do resumo. Apesar de haver duas bibliografias, o arquivo |.bib| que contém as entradas é um só.
+%
+% Será necessário que o usuário produza duas entradas \textit{bibtex} com os seus dados e nomeie as chaves destas entradas como |this| e |thisen|, para referência em português e inglês, respectivamente.\\
+%
+% O processo funciona da seguinte forma.\\
+% 
+% Definimos duas novas bibliografias com um texto vazio:
+%    \begin{macrocode}
+\newcites{this}{ }
+\newcites{thisen}{ }
+%    \end{macrocode}
+%
+% Definimos um comando que recebe como parâmetro o nome da bibliografia a ser utilizada:
+%    \begin{macrocode}
+\newcommand\refthis[2][]{
+\begingroup
+\let\clearpage\relax
+\vspace{-40pt}
+\expandafter\csname nocitethis#1\endcsname{this#1}
+\expandafter\csname bibliographystylethis#1\endcsname{abntex2-\AbntCitetype}
+\expandafter\csname bibliographythis#1\endcsname{#2}
+\vspace{\onelineskip}
+\endgroup
+}
+%    \end{macrocode}
+%
+% Agora basta que o usuário inclua o comando |\refthis|\oarg{en}\marg{bib file} antes do texto do resumo ou \textit{abstract}.
 %
 %
 %

@@ -2,6 +2,8 @@ NAME  = utfpr-pg
 EX    = exemplos
 DUM   = dummy
 DUMMY = $(DUM)/dummy
+THIS = $(DUM)/this
+THISEN = $(DUM)/thisen
 TCC   = $(EX)/exemplo-tcc
 SHELL = bash
 PWD   = $(shell pwd)
@@ -25,6 +27,8 @@ dummy: $(DUMMY).tex $(NAME).cls
 	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUMMY).tex
 	cp $(DUMMY).bib ./
 	bibtex $(DUMMY).aux
+	bibtex $(THIS).aux
+	bibtex $(THISEN).aux
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
 	make clean
