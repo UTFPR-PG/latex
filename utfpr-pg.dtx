@@ -594,10 +594,15 @@ placement=tbhp,
 % Definimos um comando que recebe como parâmetro o nome da bibliografia a ser utilizada:
 %    \begin{macrocode}
 \newcommand\refthis[2][]{
+\begingroup
+\let\clearpage\relax
+\vspace{-40pt}
 \expandafter\csname nocitethis#1\endcsname{this#1}
 \expandafter\csname bibliographystylethis#1\endcsname{abntex2-\AbntCitetype}
 \expandafter\csname bibliographythis#1\endcsname{#2}
-\vspace{\onelineskip}}
+\vspace{\onelineskip}
+\endgroup
+}
 %    \end{macrocode}
 %
 % Agora basta que o usuário inclua o comando |\refthis|\oarg{en}\marg{bib file} antes do texto do resumo ou \textit{abstract}.
