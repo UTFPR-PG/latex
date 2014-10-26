@@ -336,8 +336,16 @@ placement=tbhp,
 %\end{resumo}
 % \end{verbatim}
 % 
-%
-%
+% Será necessário compilar as duas entradas separadamente, da seguinte forma:
+% 
+%\begin{verbatim}
+%pdflatex arquivo.tex
+%bibtex arquivo.aux
+%bibtex this.aux
+%bibtex thisen.aux
+%pdflatex arquivo.tex
+%pdflatex arquivo.tex
+%\end{verbatim}
 % ^^A ------------------------------------- enduser -------------------------------------------
 % \section{Informações para o desenvolvedor}
 % Esta seção contém informações para aqueles que estão fazendo o desenvolvimento e manutenção da classe, bem como aqueles que por algum motivo específico precisam de mais detalhes sobre a implementação.
@@ -636,7 +644,7 @@ placement=tbhp,
 %   O texto deverá conter no máximo 500 palavras e ser antecedido pela referência do estudo. Também, não deve conter citações. O resumo deve ser redigido em parágrafo único, espaçamento simples e seguido das palavras representativas do conteúdo do estudo, isto é, palavras-chave, em número de três a cinco, separadas entre si por ponto e finalizadas também por ponto.
 % \end{quoting}
 %
-% Para incluir a referência do próprio estudo, utilizaremos o pacote |multibib| para inserir duas bibliografias, uma que funcionará normalmente e será apresentada no final do trabalho e outra que servirá apenas para referenciarmos o próprio trabalho. Esta bibliografia será exibida antes do resumo. Apesar de haver duas bibliografias, o arquivo |.bib| que contém as entradas é um só.
+% Para incluir a referência do próprio estudo, utilizaremos o pacote |multibib| para inserir duas bibliografias, uma que funcionará normalmente e será apresentada no final do trabalho e outra que servirá apenas para referenciarmos o próprio trabalho. Esta bibliografia será exibida antes do resumo. Apesar de haver duas bibliografias, o arquivo |.bib| que contém as entradas é um só \footnote{Apesar disso, é preciso rodar o |bibtex| nos dois |.aux| extra que serão gerados.}.
 %
 % Será necessário que o usuário produza duas entradas \textit{bibtex} com os seus dados e nomeie as chaves destas entradas como |this| e |thisen|, para referência em português e inglês, respectivamente.\\
 %
