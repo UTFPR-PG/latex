@@ -463,8 +463,6 @@ placement=tbhp,
 \renewcommand{\ABNTEXchapterfontsize}{\normalsize}
 \renewcommand{\ABNTEXsectionfont}{}
 \renewcommand{\ABNTEXsectionfontsize}{\normalsize}
-%^^A\newcommand{\primeirasmaiusculas}[1]{\titlecap{#1}}
-%^^A\setsubsecheadstyle{\primeirasmaiusculas}
 \renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
 \renewcommand{\ABNTEXsubsubsubsectionfont}{\itshape}
 %\fi
@@ -594,7 +592,6 @@ placement=tbhp,
 %    \begin{macrocode}
 \renewcommand{\tocprintchapter}{
        \addtocontents{toc}{\cftsetindents{chapter}{0em}{1em}}}
-\cftsetindents{chapter}{0em}{1em} % here for backwards compatibility, the corret way is the above
 \cftsetindents{section}{0em}{1em}
 \cftsetindents{subsection}{0em}{1em}
 \cftsetindents{subsubsection}{0em}{1em}
@@ -620,16 +617,24 @@ placement=tbhp,
 %
 % Algumas das modificações necessárias já foram feitas quando se modificaram as fontes para os capítulos, seções, etc., restando aqui as que são relativas ao sumário apenas:
 %
-%^^A \renewcommand{\cftchapterfont}{\bfseries} já está na seção Fonte
 %    \begin{macrocode}
 \renewcommand{\cftchapterleader}{\normalfont\cftdotfill{\cftchapterdotsep}}
-\renewcommand{\cftchapterpagefont}{\normalfont}
 \renewcommand{\cftdotsep}{1}
+
+\newcommand{\upcase}[1]{\uppercase{#1}}
+
+\renewcommand{\cftchapterfont}{\normalfont\bfseries}
+\renewcommand{\cftsectionfont}{\mdseries\upcase}
+\renewcommand{\cftsubsectionfont}{\normalfont}
+\renewcommand{\cftsubsubsectionfont}{\normalfont}
+\renewcommand{\cftparagraphfont}{\normalfont\itshape}
+
+\renewcommand{\cftchapterpagefont}{\cftchapterfont}
+\renewcommand{\cftsectionpagefont}{\cftsectionfont}
+\renewcommand{\cftsubsectionpagefont}{\cftsubsectionfont}
+\renewcommand{\cftsubsubsectionpagefont}{\cftsubsubsectionfont}
+\renewcommand{\cftparagraphpagefont}{\cftparagraphfont}
 %    \end{macrocode}
-%^^A\newcommand{\upcase}[1]{\uppercase{#1}} mover p/ seção Fonte
-%^^A\renewcommand{\cftsectionfont}{\mdseries\upcase} mover p/ seção Fonte
-%^^A\renewcommand{\cftsubsectionfont}{\mdseries} mover p/ seção Fonte
-%^^A\renewcommand{\cftsubsubsectionfont}{\mdseries} mover p/ seção Fonte
 % 
 % As referências devem aparecer como um capítulo normal no sumário:
 %
