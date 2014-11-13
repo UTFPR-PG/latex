@@ -22,6 +22,8 @@ tcc: $(TCC).tex $(NAME).cls
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
 	cp $(TCC).bib ./
 	bibtex $(TCC).aux
+	bibtex $(EX)/this.aux
+	bibtex $(EX)/thisen.aux
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
 	make clean
@@ -36,11 +38,6 @@ inst: all
 	cp $(NAME).dtx $(UTREE)/source/latex/$(NAME)
 	cp $(NAME).cls $(UTREE)/tex/latex/$(NAME)
 	cp $(NAME).pdf $(UTREE)/doc/latex/$(NAME)
-#install: all
-#	mkdir -p $(LOCAL)/{tex,source,doc}/latex/$(NAME)
-#	cp $(NAME).dtx $(LOCAL)/source/latex/$(NAME)
-#	cp $(NAME).cls $(LOCAL)/tex/latex/$(NAME)
-#	cp $(NAME).pdf $(LOCAL)/doc/latex/$(NAME)
 zip: all
 	mkdir $(TDIR)
 	cp $(NAME).{pdf,cls,dtx} $(TDIR)
