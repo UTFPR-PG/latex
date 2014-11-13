@@ -1,17 +1,13 @@
 NAME  = utfpr-pg
 EX    = exemplos
-DUM   = dummy
-DUMMY = $(DUM)/dummy
-THIS = $(DUM)/this
-THISEN = $(DUM)/thisen
 TCC   = $(EX)/exemplo-tcc
 SHELL = bash
 PWD   = $(shell pwd)
 TEMP := $(shell mktemp -d)
 TDIR  = $(TEMP)/$(NAME)
 VERS  = $(shell ltxfileinfo -v $(NAME).dtx)
-LOCAL = $(shell kpsewhich --var-value TEXMFLOCAL)
 UTREE = $(shell kpsewhich --var-value TEXMFHOME)
+LOCAL = $(shell kpsewhich --var-value TEXMFLOCAL)
 all:	$(NAME).pdf clean
 $(NAME).cls: $(NAME).dtx
 	pdflatex -shell-escape -recorder $(NAME).dtx
@@ -22,16 +18,6 @@ $(NAME).pdf: $(NAME).dtx
 	if [ -f $(NAME).idx ]; then makeindex -q -s gind.ist -o $(NAME).ind $(NAME).idx; fi
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
-.PHONY: dummy
-dummy: $(DUMMY).tex $(NAME).cls
-	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUMMY).tex
-	cp $(DUMMY).bib ./
-	bibtex $(DUMMY).aux
-	bibtex $(THIS).aux
-	bibtex $(THISEN).aux
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
-	make clean
 tcc: $(TCC).tex $(NAME).cls
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
 	cp $(TCC).bib ./
@@ -44,18 +30,17 @@ clean:
 	rm -f *.bib
 distclean: clean
 	rm -f $(NAME).{pdf,cls}
-	rm -f $(DUMMY).{pdf,cls}
 	rm -f $(TCC).{pdf,cls}
 inst: all
 	mkdir -p $(UTREE)/{tex,source,doc}/latex/$(NAME)
 	cp $(NAME).dtx $(UTREE)/source/latex/$(NAME)
 	cp $(NAME).cls $(UTREE)/tex/latex/$(NAME)
 	cp $(NAME).pdf $(UTREE)/doc/latex/$(NAME)
-install: all
-	mkdir -p $(LOCAL)/{tex,source,doc}/latex/$(NAME)
-	cp $(NAME).dtx $(LOCAL)/source/latex/$(NAME)
-	cp $(NAME).cls $(LOCAL)/tex/latex/$(NAME)
-	cp $(NAME).pdf $(LOCAL)/doc/latex/$(NAME)
+#install: all
+#	mkdir -p $(LOCAL)/{tex,source,doc}/latex/$(NAME)
+#	cp $(NAME).dtx $(LOCAL)/source/latex/$(NAME)
+#	cp $(NAME).cls $(LOCAL)/tex/latex/$(NAME)
+#	cp $(NAME).pdf $(LOCAL)/doc/latex/$(NAME)
 zip: all
 	mkdir $(TDIR)
 	cp $(NAME).{pdf,cls,dtx} $(TDIR)
