@@ -16,15 +16,6 @@ Com os arquivos utfpr-pg.dtx e Makefile na mesma pasta:
 O arquivo utfpr-pg.pdf que será criado na etapa 1, contém informações adicionais de uso.
 
 
-## Informações para desenvolvedores:
- * Pull requests somente no branch devel.
- * A wiki possui guias e manuais referentes às principais tecnologias utilizadas.
-
-### Workflow básico:
- 1. execute ```make``` para gerar a documentação e o arquivo da classe.
- 2. dummy.tex é o arquivo para testes locais. Não fazer commit do mesmo.
- 3. ```make dummy``` no diretório raiz do repo irá compilar o dummy com o utfpr-pg.cls da pasta raiz.
-
 ----
 *Mantido por:*
 
