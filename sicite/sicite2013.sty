@@ -1,0 +1,156 @@
+%%
+%% This is file `sicite2013.sty',
+%% generated with the docstrip utility.
+%%
+%% ----------------------------------------------------------------
+%% sicite2013 --- Pacote para o corre do sicite
+%% Author:  Fabiano Rosas
+%% E-mail:  fabianorosas@gmail.com
+%% License: Released under the LaTeX Project Public License v1.3c or later
+%% See:     http://www.latex-project.org/lppl.txt
+%% ----------------------------------------------------------------
+%% 
+%% Utiliza-se da classe abntex2
+%% Common use case: \documentclass[oldfontcommands,12pt,openright,article,oneside,a4paper,section=TITLE,english,brazil]{abntex2}
+
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{sicite2013}
+    [2013/11/05 v1.00 A new LaTeX package]
+
+\RequirePackage{etoolbox}
+\RequirePackage{array}
+\RequirePackage{tgtermes}
+\RequirePackage{indentfirst}
+\RequirePackage[num]{abntex2cite}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\citebrackets[]
+
+\providecommand{\ponto}{\textbf{.}\ }
+
+\renewcommand{\thepage}{}
+
+\setaftersubsecskip{0cm}
+\renewcommand{\@memb@bsec}{\section*{\bibname}\prebibhook}
+\renewcommand{\bibsection}{\@memb@bsec}
+
+\renewcommand{\ABNTEXsectionfont}{\bfseries}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+
+\providecommand{\imprimirprojeto}{}
+\newcommand{\projeto}[1]{\renewcommand{\imprimirprojeto}{#1}}
+\providecommand{\imprimirdataingresso}{}
+\newcommand{\dataingresso}[1]{\renewcommand{\imprimirdataingresso}{#1}}
+\providecommand{\imprimircondicao}{}
+\newcommand{\condicao}[1]{\renewcommand{\imprimircondicao}{#1}}
+\providecommand{\imprimircurso}{}
+\newcommand{\curso}[1]{\renewcommand{\imprimircurso}{#1}}
+
+\providecommand{\imprimirdepartamento}{\@latex@error{\noexpand\departamento vazio!}\@ehc}
+\newcommand{\departamento}[1]{\renewcommand{\imprimirdepartamento}{#1}}
+
+\providecommand{\imprimirarea}{}
+\newcommand{\area}[1]{\renewcommand{\imprimirarea}{#1}}
+
+\renewcommand{\imprimircapa}{
+  \begin{capa}
+    \center
+    \begin{table}
+      % \renewcommand{\arraystretch}{1.5} % increase space between text and lines
+      \begin{tabular}{L{0.25\columnwidth} L{0.75\columnwidth}}
+        \includegraphics[scale=.11]{./logoUtfpr.png}&
+        \textit{\textbf{Ministério da Educação}}\newline
+        \textbf{Universidade Tecnológica Federal do Paraná}\newline
+        \textit{Pró-Reitoria de Pesquisa e Pós-Graduação}\\
+        \hline\\
+        \newline
+      \end{tabular}
+      \end{table}
+
+    {\large \bfseries Relatório Final de Atividades}
+
+    \vspace*{\fill}
+    {\Large \bfseries\imprimirtitulo}
+
+    {\large \bfseries vinculado ao projeto}
+
+    {\large \bfseries\imprimirprojeto}
+
+    {\large \bfseries\imprimirdepartamento}
+
+    \vspace*{\fill}
+
+    {\normalsize \bfseries\imprimirautor}
+
+    {\normalsize \bfseries\imprimircondicao}
+
+    {\normalsize \bfseries\imprimircurso}
+
+    {\normalsize \bfseries Data de ingresso no programa: \imprimirdataingresso}
+
+    {\normalsize \bfseries Prof. Dr. \imprimirorientador}
+    
+    \vspace*{\fill}
+    
+    {Área do conhecimento:\ \normalsize\imprimirarea}
+
+    {\itshape CAMPUS \imprimirlocal}, {\imprimirdata}
+    
+    \vspace*{1cm}
+  \end{capa}
+}
+
+\renewcommand{\folhaderostocontent}{
+   \begin{center}
+
+     %\vspace*{1cm}
+     {\normalsize \bfseries \MakeUppercase \imprimirautor}
+     
+     {\normalsize \bfseries \MakeUppercase \imprimirorientador}
+
+     \vspace*{\fill}\vspace*{\fill}
+     {\normalsize \bfseries \imprimirtitulo}
+     \vspace*{\fill}
+
+     \hspace{.45\textwidth}
+     \begin{minipage}{.5\textwidth}
+       \SingleSpacing
+       \imprimirpreambulo
+     \end{minipage}%
+     \vspace*{\fill}
+
+     \vspace*{\fill}
+
+     {\normalsize\imprimirlocal}, {\normalsize\imprimirdata}
+     \vspace*{1cm}
+
+   \end{center}
+}
+
+\renewcommand{\@biblabel}[1]{%
+        \ifthenelse{\equal{#1}{}}{}{%
+                \def\biblabeltext{{\citenumstyle [#1]\hspace{\biblabelsep}}}%
+
+                \settowidth{\ABCIauxlen}{\biblabeltext}%
+
+                \ifthenelse{\lengthtest{\ABCIauxlen<\minimumbiblabelwidth}}
+                {\setlength{\ABCIauxlen}{\minimumbiblabelwidth-\ABCIauxlen}}
+                {\setlength{\ABCIauxlen}{0cm}}%
+
+                {\biblabeltext\hspace{\ABCIauxlen}}%
+        }%
+}%
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Fabiano Rosas.
+%%
+%% End of file `sicite2013.sty'.

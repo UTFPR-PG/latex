@@ -1,0 +1,44 @@
+%%% handoutUtfprTcc-doc.tex
+%%% Simples documentação e exemplo do uso da classe de documentação de TCC da UTFPR (PG)
+\documentclass[cocic]{handoutUtfprTcc}
+
+%\usepackage[brazil]{babel}		% pacote ja chamado pela classe
+%\usepackage[utf8]{inputenc}	% pacote ja chamado pela classe
+\usepackage[T1]{fontenc}		% pacote para acentuacao no pdf (opcional ao gosto do autor)
+\usepackage{times}				% fonte times (opcional ao gosto do autor)
+% (fonte arial opcional ao gosto do autor)
+\renewcommand{\rmdefault}{phv}	% Arial
+\renewcommand{\sfdefault}{phv}	% Arial
+
+%\usepackage{graphicx}			% pacote ja chamado pela classe
+%\usepackage{array}				% pacote ja chamado pela classe
+
+\titulo{Exemplo mínimo da classe de documentação de TCC da UTFPR(PG)}
+
+\begin{document}
+
+\imprimircapa
+
+\section{Introdução e exemplos de uso}
+	O uso dessa classe é feito por \verb|\documentclass[cocic]{handoutUtfprTcc}| ou \verb|\documentclass[coads]{handoutUtfprTcc}| produzindo os respectivos cabeçalhos com os textos do curso de computação ou tecnologia de informação. Caso omita-se o tipo do curso o padrão \verb|cocic| é utilizado.
+	
+	Existem três tipos de modelos, o ``cronograma'', o ``relatório'' e o ``nenhum'':
+	\begin{itemize}
+		\item	O modo ``nenhum'', é escolhido por não se passar opção para a classe além do departamento. Ele produz somente o header superior e a impressão de título caso definido. Este modo é o mesmo que este documento utiliza. Ex.: \verb|\documentclass[coads]{handoutUtfprTcc}| ou
+		\newline\verb|\documentclass[cocic]{handoutUtfprTcc}|
+		
+		\item	O modo ``cronograma'' difere por não possuir campos de local, hora e duração da reunião. Contudo, o comando obrigatório para a classe ``cronograma'' é \verb|\coordenadorTCC{nome}| o qual define o nome do professor(a) coordenador de TCC abaixo do campo de assinatura. Para professor\textbf{\underline{a}} passa-se o argumento opcional [a]. Ex.:\verb|\coordenadorTCC[a]{ProfessorA}|. Para definição da data, acima da assinatura, pode-se setar o comando \verb|\data{}|, automaticamente removendo o campo pré-formatado para preenchimento da data. Ex de uso da classe.:
+		\newline\verb|\documentclass[cocic, cronograma]{handoutUtfprTcc}|
+		
+		\item	O modo ``relatório'' apresenta em forma de tabela invisível os campos acima citados. Pode-se preenchê-los usando \verb|\data{dia/mes/ano}|, \verb|\hora{hora}|, \verb|\local{lugar}| e \verb|\duracao{tempo}|. Caso algum seja omitido uma linha será produzida para facilitar o preenchimento manual.
+	\end{itemize}
+	
+	Os modos ``cronograma'' e ``relatório'' apresentam o mesmo cabeçalho que inclui os comandos \verb|\orientador{nome}|, \verb|\coorientador{nome}|, \verb|autor{aluno}|, \verb|\autorDois{aluno2}| e \verb|\tituloTCC{titulo}|. Com exceção de \newline\verb|\coorientador{}| e \verb|\autorDois{}| todos os outros são mandatórios.
+	
+	A classe é baseada no padrão \verb|abntex2| do \LaTeXe, e todas as respectivas opções de \verb|abntex2| são repassadas para a mesma como\newline \verb|\documentclass[cocic,landscape]{handoutUtfprTcc}|
+	
+	Também é necessário que as imagens \verb|logoUtfpr.png| e \verb|logoDainf.png| estejam na mesma pasta do \textbf{.tex} a ser compilado.
+
+	Dúvidas, sugestões ou comentários podem ser endereçados ao email\newline gbc921@gmail.com.
+
+\end{document}
