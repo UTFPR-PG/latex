@@ -7,7 +7,7 @@
 \usepackage{amssymb}
 \usepackage{lipsum}
 
-\graphicspath{{exemplos/imagens/}}
+\graphicspath{{dummy/imagens/}}
 
 \DeclareFloatingEnvironment[
 fileext=lod,
@@ -52,16 +52,16 @@ placement=tbhp,
 \imprimirfolhaderosto
 
  \begin{resumo}
-   \refthis{exemplo-tcc}
+   \refthis{dummy}
    \lipsum[23]
    \vspace{\onelineskip}
    \noindent
-   \textbf{Palavras-chaves}: palavras. chaves.
+   \textbf{Palavras-chaves}: palavras. chaves. quico.
  \end{resumo}
 
  \begin{resumo}[Abstract]
    \begin{otherlanguage*}{english}
-   \refthis[en]{exemplo-tcc}
+   \refthis[en]{dummy}
      This is the english lipsum. \lipsum[2]
      \vspace{\onelineskip}
      \noindent
@@ -95,7 +95,8 @@ placement=tbhp,
 \pagestyle{simple}
 
 \chapter{Introdução}
-\lipsum[1] Este parágrado contém um exemplo de citação \cite{kwiatkowska_probabilistic_2002}.
+\lipsum[1]
+\cite{kwiatkowska_probabilistic_2002}.
 
 \section{Objetivos}
 Os objetivos deste trabalho são:
@@ -105,16 +106,16 @@ Os objetivos deste trabalho são:
 \end{itemize}
 
 \section{Justificativa}
-\lipsum[4-7] Lorem ipsum dolor sit amet \cite{gummalla}.
+\lipsum[4-7] \cite{gummalla}.
 
 \chapter{Fundamentação teórica}
-\lipsum[2-4]
+\lipsum[2-4] \cite{wing98}.
 
 \section{Especificação formal}
 \lipsum[7-9]
-\subsection{Domínio Sintático}
+\subsection{Domínio sintático}
 \lipsum[10-11]
-\subsection{Domínio Semântico}
+\subsection{Domínio semântico}
 \lipsum[12-15]
 \subsubsection{Verificação formal}
 \lipsum[16-17]
@@ -137,7 +138,7 @@ A princípio, este programa faz o que foi especificado, o processo \textsf{Inc} 
 \section{Propriedades}
 \lipsum[55]
 
-\subsection{Vantagens e Desvantagens}
+\subsection{Vantagens e desvantagens}
 A seguir, estão listadas algumas das vantagens e desvantagens do com relação às outras técnicas de verificação como a prova de teoremas, simulação e teste.
 
 Segundo \citeonline{Clarke_2008}:
@@ -178,12 +179,11 @@ singlelinecheck=false
 % Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
 \bookmarksetup{startatroot}%
 
-\chapter[Conclusão]{Concusão}
-\lipsum[1]
-
+% \chapter*[Conclusão]{Conclusão}
+% \addcontentsline{toc}{chapter}{Conclusão}
 
 \postextual
-\bibliography{exemplo-tcc}
+\bibliography{dummy}
 
 % \begin{apendicesenv}
 %   %   Imprime uma página indicando o início dos apêndices
