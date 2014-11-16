@@ -495,7 +495,7 @@ placement=tbhp,
 % Para isso, adicionamos um \textit{hook} ao comando |\pretextual|, aplicando o comando |\SingleSpacing|:
 %
 %    \begin{macrocode}
-\pretocmd{\pretextual}{%
+\apptocmd{\pretextual}{%
         \SingleSpacing}{}{%
         \ClassWarning{utfpr-pg}{%
                 Erro ao modificar o comando \@backslashchar pretextual,
@@ -513,8 +513,9 @@ placement=tbhp,
 %
 % De maneira análoga à anterior:
 %    \begin{macrocode}
-\pretocmd{\textual}{%
+\apptocmd{\textual}{%
         \pagestyle{simple}%
+        \aliaspagestyle{chapter}{simple}%
         \OnehalfSpacing}{}{%
         \ClassWarning{utfpr-pg}{%
                 Erro ao modificar o comando \@backslashchar textual,
