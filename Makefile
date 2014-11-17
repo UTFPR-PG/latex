@@ -34,17 +34,22 @@ tcc: $(TCC).tex $(NAME).cls
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
 	cp $(TCC).bib ./
 	bibtex $(TCC).aux
-	bibtex $(TCC)/this.aux
-	bibtex $(TCC)/thisen.aux
+	bibtex $(EX)/this.aux
+	bibtex $(EX)/thisen.aux
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
 	make clean
 clean:
+# We don't want clean to clean all subdirectories files all the time, just the root
 	find -maxdepth 1 -iregex '.*\.\(log\|aux\|lof\|lot\|bit\|idx\|glo\|bbl\|ilg\|toc\|ind\|ins\|out\|blg\|synctex.gz\|log\|bm\|brf\|bak\|bst\|fls\|loq\|hd\)' -delete
 	rm -f *.bib
-distclean: clean
+distclean:
+# we DO need to clean all subfolders
+	find -not -path "./.git/*" -iregex '.*\.\(log\|aux\|lof\|lot\|bit\|idx\|glo\|bbl\|ilg\|toc\|ind\|ins\|out\|blg\|synctex.gz\|log\|bm\|brf\|bak\|bst\|fls\|loq\|hd\)' -delete
 	rm -f $(NAME).{pdf,cls}
 	rm -f $(TCC).{pdf,cls}
+# just to play safe
+	rm -f *.bib 
 inst: all
 	mkdir -p $(UTREE)/{tex,source,doc}/latex/$(NAME)
 	cp $(NAME).dtx $(UTREE)/source/latex/$(NAME)
