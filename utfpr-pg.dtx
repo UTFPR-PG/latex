@@ -421,7 +421,8 @@ placement=tbhp,
 
     {\large\MakeUppercase\imprimirautor}
 	
-    \vspace*{\fill}\vspace*{\fill}
+    \vspace*{\fill}
+    \vspace*{\fill}
     \begin{center}
       {\bfseries\large\MakeUppercase\imprimirtitulo}\par
     \end{center}
@@ -432,14 +433,14 @@ placement=tbhp,
       \begin{minipage}{.5\textwidth}
       	\SingleSpacing
          \imprimirpreambulo
+         \vskip\onelineskip
+         {\imprimirorientadorRotulo~\imprimirorientador\par}
+         \abntex@ifnotempty{\imprimircoorientador}{%
+                 {\imprimircoorientadorRotulo~\imprimircoorientador}}%
        \end{minipage}%
-       \vspace*{\fill}
     }%
 
-    {\large\imprimirorientadorRotulo~\imprimirorientador\par}
-    \abntex@ifnotempty{\imprimircoorientador}{%
-       {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
-    }%
+    \vspace*{\fill}
     \vspace*{\fill}
 
     {\large\MakeUppercase\imprimirlocal}\par
