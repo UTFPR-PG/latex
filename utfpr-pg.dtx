@@ -645,10 +645,13 @@ placement=tbhp,
 \renewcommand{\cftparagraphpagefont}{\cftparagraphfont}
 %    \end{macrocode}
 % 
-% As referências devem aparecer como um capítulo normal no sumário:
+% As referências devem aparecer no sumário como um capítulo normal, porém sem numeração. Para tanto é necessário que evitemos que a entrada de sumário seja escrita na \textit{table of contents} (|\nobibintoc|) para que possamos adicionar nossa própria entrada com a formatação adequada. Além disso, a indentação precisa ser ajustada\footnote{\{0em\} seria o espaço dedicado para o número do capítulo, mas como o capítulo de referências não possui numeração no sumário, este parâmetro não serve para nada}:
 %
 %    \begin{macrocode}
-\renewcommand{\bibsection}{\chapter*{\bibname}\prebibhook}
+\nobibintoc
+\renewcommand{\prebibhook}{%
+        \addtocontents{toc}{\cftsetindents{chapter}{.27em}{0em}}
+        \addcontentsline{toc}{chapter}{\upcase\bibname}}
 %    \end{macrocode}
 %
 %
@@ -674,6 +677,7 @@ placement=tbhp,
 % Definimos um comando que recebe como parâmetro o nome da bibliografia a ser utilizada:
 %    \begin{macrocode}
 \newcommand\refthis[2][]{
+\renewcommand{\prebibhook}{}
 \begingroup
 \let\clearpage\relax
 \vspace{-40pt}
