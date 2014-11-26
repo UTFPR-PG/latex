@@ -11,8 +11,6 @@ VERS  = $(shell ltxfileinfo -v $(NAME).dtx)
 UTREE = $(shell kpsewhich --var-value TEXMFHOME)
 LOCAL = $(shell kpsewhich --var-value TEXMFLOCAL)
 all:	$(NAME).pdf clean
-$(NAME).cls: $(NAME).dtx
-	pdflatex -shell-escape -recorder $(NAME).dtx
 $(NAME).pdf: $(NAME).dtx
 	pdflatex -shell-escape -recorder $(NAME).dtx
 	bibtex $(NAME).aux
@@ -21,7 +19,7 @@ $(NAME).pdf: $(NAME).dtx
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 .PHONY: dummy
-dummy: $(DUMMY).tex $(NAME).cls
+dummy: $(DUMMY).tex $(NAME).pdf
 	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUMMY).tex
 	cp $(DUMMY).bib ./
 	bibtex $(DUMMY).aux
@@ -30,7 +28,7 @@ dummy: $(DUMMY).tex $(NAME).cls
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
 	make clean
-tcc: $(TCC).tex $(NAME).cls
+tcc: $(TCC).tex $(NAME).pdf
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
 	cp $(TCC).bib ./
 	bibtex $(TCC).aux
