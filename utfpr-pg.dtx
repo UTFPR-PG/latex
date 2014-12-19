@@ -149,7 +149,7 @@ placement=tbhp,
 %
 %\iffalse
 \LoadClass[a4paper,12pt,openright,oneside,chapter=TITLE,section=TITLE,hidelinks,brazil]{abntex2}
-\RequirePackage[alf,abnt-emphasize=bf,abnt-repeated-author-omit=yes,abnt-etal-text=it,abnt-full-initials=no,abnt-thesis-year=final]{abntex2cite}
+\RequirePackage[alf,abnt-emphasize=bf,abnt-repeated-author-omit=yes,abnt-etal-text=it]{abntex2cite}
 \RequirePackage{indentfirst}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{lastpage}
@@ -682,6 +682,10 @@ placement=tbhp,
 \let\clearpage\relax
 \vspace{-40pt}
 \expandafter\csname nocitethis#1\endcsname{this#1}
+\let\oldcite\nocite
+\renewcommand\nocite\citeoption
+\expandafter\csname nocitethis#1\endcsname{abnt-emphasize=bf,abnt-full-initials=yes,abnt-thesis-year=both}
+\renewcommand\nocite\oldcite
 \expandafter\csname bibliographystylethis#1\endcsname{abntex2-\AbntCitetype}
 \expandafter\csname bibliographythis#1\endcsname{#2}
 \vspace{\onelineskip}
