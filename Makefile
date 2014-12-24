@@ -1,7 +1,6 @@
 NAME  = utfpr-pg
 EX    = exemplos
 DUM   = dummy
-DUMMY = $(DUM)/dummy
 TCC   = $(EX)/exemplo-tcc
 SHELL = bash
 PWD   = $(shell pwd)
@@ -19,14 +18,15 @@ $(NAME).pdf: $(NAME).dtx
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 	pdflatex --recorder --interaction=nonstopmode $(NAME).dtx > /dev/null
 .PHONY: dummy
-dummy: $(DUMMY).tex $(NAME).pdf
-	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUMMY).tex
-	cp $(DUMMY).bib ./
-	bibtex $(DUMMY).aux
-	bibtex $(DUM)/this.aux
-	bibtex $(DUM)/thisen.aux
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
-	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUMMY).tex
+dummy: $(DUM)/dummy.tex $(NAME).pdf
+	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUM)/dummy.tex
+	cp $(DUM)/dummy.bib ./
+	cp $(DUM)/autocitacao_dummy.bib ./
+	bibtex $(DUM)/dummy.aux
+	bibtex $(DUM)/autopt.aux
+	bibtex $(DUM)/autoen.aux
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUM)/dummy.tex
+	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUM)/dummy.tex
 	make clean
 tcc: $(TCC).tex $(NAME).pdf
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex

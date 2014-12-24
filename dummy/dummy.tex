@@ -18,9 +18,12 @@ placement=tbhp,
 
 \departamento{Departamento Acadêmico de Informática}
 \curso{Bacharelado em Ciência da Computação}
-\autor{Nome Aluno}
-\titulo{Titulo do trabalho de conclusão de curso}
+\autor{Nome do Aluno}
+\titulo{Título}
+\title{Title}
 \tipotrabalho{Trabalho de Conclusão de Curso}
+\instituicao{\utfpr}
+\school{\futpr}
 \local{Ponta Grossa}
 \data{\the\year}
 
@@ -45,14 +48,15 @@ placement=tbhp,
 
 \makeindex
 \begin{document}
+
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing
 
 \imprimircapa
 \imprimirfolhaderosto
 
- \begin{resumo}
-   \refthis{dummy}
+\begin{resumo}
+  \autocitacao
    \lipsum[23]
    \vspace{\onelineskip}
    \noindent
@@ -61,7 +65,7 @@ placement=tbhp,
 
  \begin{resumo}[Abstract]
    \begin{otherlanguage*}{english}
-   \refthis[en]{dummy}
+     \autocitacao[en]
      This is the english lipsum. \lipsum[2]
      \vspace{\onelineskip}
      \noindent
