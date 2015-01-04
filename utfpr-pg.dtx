@@ -196,9 +196,6 @@ placement=tbhp,
 % \DescribeMacro{\departamento}
 % Usa-se para definir o departamento, coordenação ou programa.
 %
-% \DescribeMacro{\school}
-% Definir o nome da instituição em inglês, para uso no \textit{abstract}.
-%
 %\iffalse
 \newcommand*\erro[1]{\@latex@error{Defina \noexpand#1!}\@ehc}
 \newcommand\utfpr{Universidade Tecnológica Federal Do Paraná}
@@ -207,14 +204,16 @@ placement=tbhp,
 \renewcommand\imprimirtitulo{\erro\titulo}
 \renewcommand*\titulo[1]{\renewcommand{\imprimirtitulo}{#1}}
 
+% Define a impressao do titulo e a redefinicao de \title
+% Nao estavam funcionado corretamente
+\newcommand\thetitle{\erro\title}
+\renewcommand*\title[1]{\renewcommand{\thetitle}{#1}}
+
 \providecommand\imprimircurso{\erro\curso}
 \newcommand*\curso[1]{\renewcommand{\imprimircurso}{#1}}
 
 \providecommand\imprimirdepartamento{}
 \newcommand*\departamento[1]{\renewcommand{\imprimirdepartamento}{#1}}
-
-\providecommand\theschool{\erro\school}
-\newcommand*\school[1]{\renewcommand{\theschool}{#1}}
 %\fi
 %
 %
@@ -678,7 +677,7 @@ placement=tbhp,
         author={\imprimirautor},
         title = {\thetitle},
         type={\imprimirtipotrabalho\ (\imprimircurso)},
-        school={\theschool},
+        school={\futpr},
         pages={\pageref{LastPage}},
         pagename={f.},
         year={\imprimirdata},
@@ -690,7 +689,7 @@ placement=tbhp,
         author={\imprimirautor},
         title = {\imprimirtitulo},
         type={\imprimirtipotrabalho\ (\imprimircurso)},
-        school={\imprimirinstituicao},
+        school={\utfpr},
         pages={\pageref{LastPage}},
         pagename={f.},
         year={\imprimirdata},
@@ -808,3 +807,4 @@ placement=tbhp,
 %
 \endinput
 % \Finale
+% vim:set ts=2 sw=2 et:
