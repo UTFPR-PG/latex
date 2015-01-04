@@ -329,20 +329,20 @@ placement=tbhp,
 % \end{verbatim}
 %
 %
-% Será criado um arquivo |autocitacao_<nomedoarquivo>.bib| no mesmo diretório onde está o |.tex|. Caso deseje usar uma entrada de referência diferente da padrão, crie um arquivo de mesmo nome com a sua entrada do \textit{bibtex}. Note que ``<nomedoarquivo>'' é o nome do arquivo |.tex|.
+% Será criado um arquivo |autocitacao.bib| no mesmo diretório onde está o |.tex|. Caso deseje usar uma entrada de referência diferente da padrão, crie um arquivo de mesmo nome com a sua entrada do \textit{bibtex}. Note que ``<nomedoarquivo>'' é o nome do arquivo |.tex|.
 % 
 % Será necessário compilar as duas citações separadamente, da seguinte forma:
 % 
 %\begin{verbatim}
 %pdflatex arquivo.tex
 %bibtex arquivo.aux
-%bibtex autopt.aux
-%bibtex autoen.aux
+%bibtex autocitacaopt.aux
+%bibtex autocitacaoen.aux
 %pdflatex arquivo.tex
 %pdflatex arquivo.tex
 %\end{verbatim}
 %
-% Os nomes |autopt| e |autoen| são padrão e devem ser mantidos inalterados.
+% Os nomes |autocitacaopt| e |autocitacaoen| são padrão e devem ser mantidos inalterados.
 % ^^A ------------------------------------- enduser -------------------------------------------
 % \section{Informações para o desenvolvedor}
 % Esta seção contém informações para aqueles que estão fazendo o desenvolvimento e manutenção da classe, bem como aqueles que por algum motivo específico precisam de mais detalhes sobre a implementação.
@@ -658,19 +658,19 @@ placement=tbhp,
 % 
 % Definimos duas novas bibliografias com um texto vazio:
 %    \begin{macrocode}
-\newcites{autopt}{ }
-\newcites{autoen}{ }
+\newcites{autocitacaopt}{ }
+\newcites{autocitacaoen}{ }
 %    \end{macrocode}
 %
 % O código a seguir checa se o arquivo de autocitação já existe e caso negativo, o cria a partir dos dados fornecidos pelo usuário no preâmbulo.
 %    \begin{macrocode}
 \AfterEndPreamble{
-  \edef\autocitefile{autocitacao_\jobname.bib}
-  \typeout{Creating/Overwriting autocitacao_\jobname.bib}
+  \edef\autocitefile{autocitacao.bib}
+  \typeout{Creating/Overwriting autocitacao.bib}
   \newwrite\@autocite
-  \immediate\openout\@autocite=autocitacao_\jobname.bib\relax
+  \immediate\openout\@autocite=autocitacao.bib\relax
   \write\@autocite{%
-    @thesis{autoen,
+    @thesis{autocitacaoen,
       author={\imprimirautor},
       title = {\thetitle},
       type={\imprimirtipotrabalho\ (\imprimircurso)},
@@ -682,7 +682,7 @@ placement=tbhp,
     }
   }
   \write\@autocite{%
-    @thesis{autopt,
+    @thesis{autocitacaopt,
       author={\imprimirautor},
       title = {\imprimirtitulo},
       type={\imprimirtipotrabalho\ (\imprimircurso)},
@@ -696,20 +696,20 @@ placement=tbhp,
 }
 %    \end{macrocode}
 %
-% O comando |\autocitacao| irá fazer um |nocite| da referência criada e exibir a bibliografia (|bibliographyauto|) no mesmo lugar. Como o estilo de bibliografia do documento está sendo ativado como parte do pacote |abntex2cite| e o pacote |multibib| exige que usemos um estilo de bilbiografia para cada nova bibliografia criada, as opções passadas para o pacote |abntex2cite| não afetarão as bibliografias do resumo, logo usamos o comando |\citeoption|, descrito no manual do abntex2cite, cap. 6. Este comando não tem efeito quando usado diretamente, pois o pacote |multibib| cria novas bibliografias. Felizmente, os comandos |nociteautopt| e |nociteautoen| criados, fazem uma chamada ao |\nocite| padrão do latex, então podemos redefinir este comando e usar |\citeoption|\footnote{no código do abntex2cite.sty há um comentário explicando que citeoption nada mais é que um comando nocite que não emite \textit{warning} quando um argumento inválido é usado.}.
+% O comando |\autocitacao| irá fazer um |nocite| da referência criada e exibir a bibliografia (|bibliographyauto|) no mesmo lugar. Como o estilo de bibliografia do documento está sendo ativado como parte do pacote |abntex2cite| e o pacote |multibib| exige que usemos um estilo de bilbiografia para cada nova bibliografia criada, as opções passadas para o pacote |abntex2cite| não afetarão as bibliografias do resumo, logo usamos o comando |\citeoption|, descrito no manual do abntex2cite, cap. 6. Este comando não tem efeito quando usado diretamente, pois o pacote |multibib| cria novas bibliografias. Felizmente, os comandos |nociteautocitacaopt| e |nociteautocitacaoen| criados, fazem uma chamada ao |\nocite| padrão do latex, então podemos redefinir este comando e usar |\citeoption|\footnote{no código do abntex2cite.sty há um comentário explicando que citeoption nada mais é que um comando nocite que não emite \textit{warning} quando um argumento inválido é usado.}.
 %    \begin{macrocode}
 \newcommand\autocitacao[1][pt]{
   \renewcommand{\prebibhook}{}
   \begingroup
   \let\clearpage\relax
   \vspace{-40pt}
-  \expandafter\csname nociteauto#1\endcsname{auto#1}
+  \expandafter\csname nociteautocitacao#1\endcsname{autocitacao#1}
   \let\oldcite\nocite
   \renewcommand\nocite\citeoption
-  \expandafter\csname nociteauto#1\endcsname{abnt-emphasize=bf,abnt-full-initials=yes,abnt-thesis-year=both}
+  \expandafter\csname nociteautocitacao#1\endcsname{abnt-emphasize=bf,abnt-full-initials=yes,abnt-thesis-year=both}
   \renewcommand\nocite\oldcite
-  \expandafter\csname bibliographystyleauto#1\endcsname{abntex2-\AbntCitetype}
-  \expandafter\csname bibliographyauto#1\endcsname{\autocitefile}
+  \expandafter\csname bibliographystyleautocitacao#1\endcsname{abntex2-\AbntCitetype}
+  \expandafter\csname bibliographyautocitacao#1\endcsname{\autocitefile}
   \vspace{\onelineskip}
   \endgroup
 }
