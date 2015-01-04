@@ -666,35 +666,31 @@ placement=tbhp,
 %    \begin{macrocode}
 \AfterEndPreamble{
   \edef\autocitefile{autocitacao_\jobname.bib}
-  \IfFileExists{\autocitefile}{
-    \typeout{File autocitacao_\jobname.bib exists. Using it.}
-  }{
-    \typeout{File autocitacao_\jobname.bib does not exist. Creating a new one.}
-    \newwrite\@autocite
-    \immediate\openout\@autocite=autocitacao_\jobname.bib\relax
-    \write\@autocite{%
-      @thesis{autoen,
-        author={\imprimirautor},
-        title = {\thetitle},
-        type={\imprimirtipotrabalho\ (\imprimircurso)},
-        school={\futpr},
-        pages={\pageref{LastPage}},
-        pagename={f.},
-        year={\imprimirdata},
-        type={\imprimirtipotrabalho}
-      }
+  \typeout{Creating/Overwriting autocitacao_\jobname.bib}
+  \newwrite\@autocite
+  \immediate\openout\@autocite=autocitacao_\jobname.bib\relax
+  \write\@autocite{%
+    @thesis{autoen,
+      author={\imprimirautor},
+      title = {\thetitle},
+      type={\imprimirtipotrabalho\ (\imprimircurso)},
+      school={\futpr},
+      pages={\pageref{LastPage}},
+      pagename={f.},
+      year={\imprimirdata},
+      type={\imprimirtipotrabalho}
     }
-    \write\@autocite{%
-      @thesis{autopt,
-        author={\imprimirautor},
-        title = {\imprimirtitulo},
-        type={\imprimirtipotrabalho\ (\imprimircurso)},
-        school={\utfpr},
-        pages={\pageref{LastPage}},
-        pagename={f.},
-        year={\imprimirdata},
-        type={\imprimirtipotrabalho}
-      }
+  }
+  \write\@autocite{%
+    @thesis{autopt,
+      author={\imprimirautor},
+      title = {\imprimirtitulo},
+      type={\imprimirtipotrabalho\ (\imprimircurso)},
+      school={\utfpr},
+      pages={\pageref{LastPage}},
+      pagename={f.},
+      year={\imprimirdata},
+      type={\imprimirtipotrabalho}
     }
   }
 }
