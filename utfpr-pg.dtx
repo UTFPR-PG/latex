@@ -430,20 +430,20 @@ placement=tbhp,
     \abntex@ifnotempty{\imprimirpreambulo}{%
       \hspace{.45\textwidth}
       \begin{minipage}{.5\textwidth}
-      	\SingleSpacing
-         \imprimirpreambulo
+       \SingleSpacing
+       \imprimirpreambulo\\
+         
+       \abntex@ifnotempty{\imprimirorientador}{\imprimirorientadorRotulo~\imprimirorientador\par}
+       \SingleSpacing
+       \abntex@ifnotempty{\imprimircoorientador}{\imprimircoorientadorRotulo~\imprimircoorientador}
+ 
        \end{minipage}%
        \vspace*{\fill}
-    }%
-
-    {\large\imprimirorientadorRotulo~\imprimirorientador\par}
-    \abntex@ifnotempty{\imprimircoorientador}{%
-       {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
-    }%
+    }
     \vspace*{\fill}
 
     {\large\MakeUppercase\imprimirlocal}\par
-    \par
+    \par   
     {\large\imprimirdata}
     \vspace*{1cm}
 
