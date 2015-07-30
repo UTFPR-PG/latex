@@ -21,19 +21,20 @@ $(NAME).pdf: $(NAME).dtx
 dummy: $(DUM)/dummy.tex $(NAME).pdf
 	pdflatex -shell-escape --output-directory=$(DUM) -recorder $(DUM)/dummy.tex
 	cp $(DUM)/dummy.bib ./
-	cp $(DUM)/autocitacao_dummy.bib ./
+	cp $(DUM)/autocitacao.bib ./
 	bibtex $(DUM)/dummy.aux
-	bibtex $(DUM)/autopt.aux
-	bibtex $(DUM)/autoen.aux
+	bibtex $(DUM)/autocitacaopt.aux
+	bibtex $(DUM)/autocitacaoen.aux
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUM)/dummy.tex
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(DUM) $(DUM)/dummy.tex
 	make clean
 tcc: $(TCC).tex $(NAME).pdf
 	pdflatex -shell-escape -recorder --output-directory=$(EX) $(TCC).tex
 	cp $(TCC).bib ./
+	cp $(EX)/autocitacao.bib ./
 	bibtex $(TCC).aux
-	bibtex $(EX)/this.aux
-	bibtex $(EX)/thisen.aux
+	bibtex $(EX)/autocitacaopt.aux
+	bibtex $(EX)/autocitacaoen.aux
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
 	pdflatex --recorder --interaction=nonstopmode --output-directory=$(EX) $(TCC).tex > /dev/null
 	make clean
